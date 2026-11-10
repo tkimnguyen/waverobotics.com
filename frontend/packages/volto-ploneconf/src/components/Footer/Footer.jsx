@@ -40,7 +40,7 @@ const Footer = ({ intl }) => {
     }),
     shallowEqual,
   );
-  const siteActions = lang ? allSiteActions[lang] : [];
+  const siteActions = [];
   return (
     <footer id="footer">
       <div className="footerDecoration"></div>

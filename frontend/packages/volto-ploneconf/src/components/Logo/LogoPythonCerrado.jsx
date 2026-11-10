@@ -22,16 +22,7 @@ const messages = defineMessages({
  */
 const LogoPythonCerrado = ({ className }) => {
   const intl = useIntl();
-  return (
-    <Image
-      src={PythonCerradoLogo}
-      alt={intl.formatMessage(messages.pythoncerrado)}
-      title={intl.formatMessage(messages.pythoncerrado)}
-      className={`logoConf logoPythonCerrado ${className}`}
-      width={'267px'}
-      height={'150px'}
-    />
-  );
+  return null;
 };
 
 export default LogoPythonCerrado;

@@ -11,6 +11,7 @@ USERS = {
     "andreclimaco": [EDITORS_GROUP],
     "ericof": [ADMIN_GROUP],
     "fredvd": [ADMIN_GROUP],
+    "tkimnguyen": [ADMIN_GROUP],
     "jhgouveia": [EDITORS_GROUP],
     "luxcas": [EDITORS_GROUP],
     "rafahela": [EDITORS_GROUP],

@@ -36,7 +36,6 @@
     "@kitconcept/volto-separator-block",
     "@kitconcept/volto-button-block",
     "@eeacms/volto-statistic-block",
-    "@plone-collective/volto-authomatic",
     "@plone-collective/volto-eventbrite-block",
     "@kitconcept/volto-light-theme",
     "@eeacms/volto-matomo"
@@ -52,7 +51,6 @@
     "@kitconcept/volto-slider-block": "^6.3.1",
     "@kitconcept/volto-social-blocks": "1.0.0-alpha.4",
     "@mbarde/volto-image-crop-widget": "0.5.1",
-    "@plone-collective/volto-authomatic": "2.0.1",
     "@plone-collective/volto-eventbrite-block": "^1.0.0-alpha.2",
     "@plonegovbr/volto-network-block": "^0.2.0",
     "classnames": "2.2.6",
