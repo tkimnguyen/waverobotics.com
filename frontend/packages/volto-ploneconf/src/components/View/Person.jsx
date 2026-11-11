@@ -1,4 +1,5 @@
 import React from 'react';
+import VoltoImage from '@plone/volto/components/theme/Image/Image';
 import { Container } from '@plone/components';
 import { Tab, Grid } from 'semantic-ui-react';
 import { flattenToAppURL } from '@plone/volto/helpers';
@@ -23,12 +24,12 @@ const Person = ({ content }) => {
         <Grid.Column width={4} className="speaker-image-wrapper">
           <div className="speakers-preview-image no-filter">
             {content.image ? (
-              <img
+              <VoltoImage
                 src={flattenToAppURL(content.image.scales.preview.download)}
                 alt={content.image_caption}
               />
             ) : (
-              <img src={DefaultImageSVG} alt="" />
+              <VoltoImage src={DefaultImageSVG} alt="" />
             )}
           </div>
           <div className="person-social">

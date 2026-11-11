@@ -8,7 +8,7 @@ import { CSSTransition } from 'react-transition-group';
 import { FormattedMessage } from 'react-intl';
 
 import { BodyClass, toBackendLang } from '@plone/volto/helpers';
-import LanguageSelector from '../../../../../components/Header/LanguageSelector';
+import LanguageSelector from '../Header/LanguageSelector';
 import { Icon } from '@plone/volto/components';
 import arrowRightSVG from '@plone/volto/icons/right-key.svg';
 import arrowLeftSVG from '@plone/volto/icons/left-key.svg';

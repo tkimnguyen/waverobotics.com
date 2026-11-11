@@ -1,3 +1,5 @@
+import loadable from '@loadable/component';
+
 // Blocks
 import SponsorsEdit from './components/Blocks/Sponsors/Edit';
 import SponsorsView from './components/Blocks/Sponsors/View';
@@ -14,8 +16,15 @@ import TeaserColoredCTA from './components/Blocks/Teaser/TeaserColoredCTA';
 import { ColoredCTAEnhancer } from './components/Blocks/Teaser/coloredCTAschema';
 
 // Slider
-import SliderBody from '@kitconcept/volto-light-theme/components/Blocks/Slider/DefaultBody.jsx';
+import SliderBody from '@kitconcept/volto-slider-block/components/DefaultBody';
 import SliderBodyFull from './components/Blocks/Slider/SliderFull';
+
+// Structural components, used through volto-light-theme's component registry
+import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
+import Navigation from './components/Navigation/Navigation';
+import MobileNavigation from './components/MobileNavigation/MobileNavigation';
+import Tags from './components/Tags/Tags';
 
 // Views
 import PersonView from './components/View/Person';
@@ -36,24 +45,13 @@ const BG_COLORS = [
 const applyConfig = (config) => {
   config.settings = {
     ...config.settings,
-    isMultilingual: true,
     supportedLanguages: ['en', 'pt-br'],
-    defaultLanguage: 'en',
     navDepth: 3,
-    image_crop_aspect_ratios: [
-      {
-        label: '16:9',
-        ratio: 16 / 9,
-      },
-      {
-        label: '4:3',
-        ratio: 4 / 3,
-      },
-      {
-        label: '1:1',
-        ratio: 1,
-      },
-    ],
+    // The site's Navigation shows dropdown menus only with this flag, which
+    // volto-light-theme 4 used to set.
+    enableFatMenu: true,
+    // Volto 19 shows the Related Items field below the content by default.
+    showRelatedItems: false,
     pictureOptions: {
       grid: [
         { media: '(min-width: 768px)', image: 'teaser' },
@@ -75,6 +73,29 @@ const applyConfig = (config) => {
     },
   };
   config.addonReducers = { ...config.addonReducers, ...reducers };
+
+  // volto-form-block's subblocks still ask Volto for these drag-and-drop
+  // libraries, which Volto 19 no longer provides.
+  config.settings.loadables = {
+    ...config.settings.loadables,
+    reactDnd: loadable.lib(() => import('react-dnd')),
+    reactDndHtml5Backend: loadable.lib(() => import('react-dnd-html5-backend')),
+  };
+
+  // volto-light-theme picks these components from the registry instead of
+  // its own (config.settings.vlt.components).
+  const vltComponents = {
+    header: Header,
+    footer: Footer,
+    navigation: Navigation,
+    mobileNavigation: MobileNavigation,
+    tags: Tags,
+  };
+  Object.entries(vltComponents).forEach(([type, method]) => {
+    config.registerUtility({ name: 'waverobotics', type, method });
+    config.settings.vlt.components[type] = 'waverobotics';
+  });
+
   config.views.contentTypesViews = {
     ...config.views.contentTypesViews,
     Person: PersonView,

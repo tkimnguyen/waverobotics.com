@@ -1,5 +1,7 @@
 :root {
   --teaser-images-aspect-ratio: #{$teaser-images-aspect-ratio};
+  // Content link color; volto-light-theme 4 hard-coded it, 8 uses this property.
+  --link-foreground-color: #0070a2;
   --narrow-container-width: 1024px;
   --default-container-width: 1024px;
   --layout-container-width: 1440px;

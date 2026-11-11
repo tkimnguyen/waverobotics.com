@@ -1,16 +1,24 @@
+// volto-button-block 5 renders the button as `a.button` (it used to be a
+// `button.ui.button` inside the link). Buttons without a link
+// (CAD, Impact on /en/member-resources/frc) are a `button.noLink`.
 .block.__button {
   .button.container {
-    button.ui.button {
+    a.button,
+    button.noLink {
+      display: inline-block;
       padding: 10px 24px;
       border: 1px solid var(--main-color);
       border-radius: 10px;
       background-color: var(--main-color);
       color: var(--reverse-color);
       font-size: 22px;
+      font-weight: 700;
       line-height: 30px;
+      text-decoration: none;
 
       &:hover {
         @include animate-hover();
+        color: var(--reverse-color);
       }
     }
   }
@@ -18,8 +26,52 @@
 
 .block.gridBlock {
   .block.__button {
-    button.ui.button {
+    // The button container is a CSS grid in volto-button-block 5; let the
+    // wrapper take the column width so the 80% minimum applies again.
+    .align {
+      width: 100%;
+    }
+
+    &.left .align {
+      text-align: left;
+    }
+
+    a.button,
+    button.noLink {
       min-width: 80%;
+      text-align: center;
+    }
+  }
+}
+
+// Mark buttons that link to other sites with an "external link" icon in the
+// button's text color (volto-light-theme 8 removed the icon for buttons).
+.block.__button .button.container a.button.external::after {
+  display: inline-block;
+  width: 0.6em;
+  height: 0.6em;
+  margin-left: 0.4em;
+  background-color: currentColor;
+  content: '';
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath d='M432 320h-32a16 16 0 00-16 16v112H64V128h144a16 16 0 0016-16V80a16 16 0 00-16-16H48a48 48 0 00-48 48v352a48 48 0 0048 48h352a48 48 0 0048-48V336a16 16 0 00-16-16zM488 0H360c-21.37 0-32.05 25.91-17 41l35.73 35.73L135 320.37a24 24 0 000 34L157.67 377a24 24 0 0034 0l243.61-243.68L471 169c15 15 41 4.5 41-17V24a24 24 0 00-24-24z'/%3E%3C/svg%3E")
+    no-repeat center / contain;
+}
+
+// Full-width buttons on phones.
+@media only screen and (max-width: $largest-mobile-screen) {
+  .block.__button .button.container {
+    grid-template-columns: 100%;
+
+    .align {
+      width: 100%;
+    }
+
+    a.button,
+    button.noLink {
+      display: block;
+      width: 100%;
+      min-width: 0;
+      text-align: center;
     }
   }
 }

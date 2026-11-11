@@ -1,13 +1,7 @@
 import React from 'react';
 import { Icon, UniversalLink } from '@plone/volto/components';
 import cx from 'classnames';
-import facebookIcon from '@plonegovbr/volto-network-block/icons/facebook.svg';
-import githubIcon from '@plonegovbr/volto-network-block/icons/github.svg';
-import instagramIcon from '@plonegovbr/volto-network-block/icons/instagram.svg';
-import linkedinIcon from '@plonegovbr/volto-network-block/icons/linkedin.svg';
-import mastodonIcon from '@plonegovbr/volto-network-block/icons/mastodon.svg';
-import twitterIcon from '@plonegovbr/volto-network-block/icons/twitter.svg';
-import youTubeIcon from '@plonegovbr/volto-network-block/icons/youtube.svg';
+import { SOCIAL_ICONS } from '../SocialLinks/SocialLinks';
 import siteIcon from '@plone/volto/icons/world.svg';
 
 const categories = {
@@ -19,37 +13,37 @@ const categories = {
   github: {
     title: 'GitHub',
     className: 'github',
-    icon: githubIcon,
+    icon: SOCIAL_ICONS.github,
   },
   mastodon: {
     title: 'Mastodon',
     className: 'mastodon',
-    icon: mastodonIcon,
+    icon: SOCIAL_ICONS.mastodon,
   },
   instagram: {
     title: 'Instagram',
     className: 'instagram',
-    icon: instagramIcon,
+    icon: SOCIAL_ICONS.instagram,
   },
   linkedin: {
     title: 'LinkedIn',
     className: 'linkedin',
-    icon: linkedinIcon,
+    icon: SOCIAL_ICONS.linkedin,
   },
   twitter: {
     title: 'X',
     className: 'twitter',
-    icon: twitterIcon,
+    icon: SOCIAL_ICONS.twitter,
   },
   facebook: {
     title: 'Facebook',
     className: 'facebook',
-    icon: facebookIcon,
+    icon: SOCIAL_ICONS.facebook,
   },
   youtube: {
     title: 'YouTube',
     className: 'youtube',
-    icon: youTubeIcon,
+    icon: SOCIAL_ICONS.youtube,
   },
 };
 

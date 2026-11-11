@@ -79,6 +79,10 @@
       justify-content: center;
       padding: 60px 50px 60px 100px;
       background: unset;
+      // slider-block 7 colors the title box and its text with the flag color.
+      --flagColor-foreground: #fff;
+      background-color: transparent;
+      color: #fff;
       transform: translateY(-50%);
       @media only screen and (max-width: $tablet-breakpoint) {
         width: 100%;

@@ -1,4 +1,5 @@
 import React from 'react';
+import VoltoImage from '@plone/volto/components/theme/Image/Image';
 import { defineMessages, useIntl, FormattedMessage } from 'react-intl';
 import { Message, Icon } from 'semantic-ui-react';
 
@@ -47,7 +48,7 @@ const TeaserFeatured = (props) => {
       {!href && isEditMode && (
         <Message>
           <div className="main-teaser-item">
-            <img src={imageBlockSVG} alt="" />
+            <VoltoImage src={imageBlockSVG} alt="" />
             <p>{intl.formatMessage(messages.PleaseChooseContent)}</p>
           </div>
         </Message>

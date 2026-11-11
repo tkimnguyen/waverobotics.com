@@ -137,3 +137,54 @@
     }
   }
 }
+
+// volto-light-theme 8 caps the logo at 80px and colors navigation items with
+// --header-foreground; keep the site's logo size and blue active/hover item.
+.header-wrapper .header .logo-nav-wrapper .logo a img.logoConf.main {
+  width: 178px;
+  height: 100px;
+  max-height: none;
+}
+
+body header.header-wrapper .header nav.navigation .conf-item .item {
+  &.active,
+  &:hover {
+    color: var(--main-color);
+  }
+}
+
+// The mobile menu's language list lost its list-style reset in
+// volto-light-theme 8 and showed a stray bullet.
+.mobile-tools {
+  padding: 0;
+  list-style: none;
+}
+
+// Phone header: less space above the logo than volto-light-theme 8's 35px,
+// and room for the full 100px logo (the theme caps the logo box at 80px).
+@media only screen and (max-width: $largest-mobile-screen) {
+  body .header-wrapper .header .logo-nav-wrapper {
+    padding-top: 15px;
+
+    .logo {
+      max-height: none;
+    }
+  }
+}
+
+// Mobile menu drawer as before volto-light-theme 8: light blue-grey, and
+// starting just below the header instead of overlapping the logo.
+@media only screen and (max-width: $computer-breakpoint) {
+  body .header-wrapper .header .logo-nav-wrapper .mobile-nav .menu-drawer {
+    background-color: #f4f7f8;
+  }
+
+  body:not(.has-toolbar):not(.has-toolbar-collapsed)
+    .header-wrapper
+    .header
+    .logo-nav-wrapper
+    .mobile-nav
+    .menu-drawer {
+    top: 143px;
+  }
+}

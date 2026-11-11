@@ -16,6 +16,11 @@ msgstr ""
 "Preferred-Encodings: utf-8\n"
 "Domain: volto\n"
 
+#. Default: "Back"
+#: components/MobileNavigation/MobileNavigation
+msgid "Back"
+msgstr ""
+
 #. Default: "Be the First!"
 #: components/Blocks/SponsorLevel/DefaultView
 msgid "Be the First!"
@@ -32,6 +37,7 @@ msgid "CTA Label"
 msgstr "Texto da Ação"
 
 #. Default: "Close menu"
+#: components/MobileNavigation/MobileNavigation
 #: components/Navigation/Navigation
 msgid "Close menu"
 msgstr "Fechar"
@@ -51,10 +57,21 @@ msgstr "Exibir botão de ação?"
 msgid "Front Page"
 msgstr "Capa"
 
+#. Default: "Home"
+#: components/MobileNavigation/MobileNavigation
+msgid "Home"
+msgstr ""
+
 #. Default: "Open menu"
+#: components/MobileNavigation/MobileNavigation
 #: components/Navigation/Navigation
 msgid "Open menu"
 msgstr "Abrir"
+
+#. Default: "Overview"
+#: components/MobileNavigation/MobileNavigation
+msgid "Overview"
+msgstr ""
 
 #. Default: "Please choose an existing content as source for this element"
 #: components/Blocks/Slider/SliderFull

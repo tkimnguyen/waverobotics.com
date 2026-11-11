@@ -29,36 +29,27 @@
   "addons": [
     "@eeacms/volto-accordion-block",
     "@kitconcept/volto-slider-block",
-    "@kitconcept/volto-social-blocks",
-    "@mbarde/volto-image-crop-widget",
     "volto-form-block",
-    "@plonegovbr/volto-network-block",
     "@kitconcept/volto-separator-block",
     "@kitconcept/volto-button-block",
-    "@eeacms/volto-statistic-block",
-    "@plone-collective/volto-eventbrite-block",
-    "@kitconcept/volto-light-theme",
-    "@eeacms/volto-matomo"
+    "@kitconcept/volto-light-theme"
   ],
   "dependencies": {
     "@plone/components": "workspace:*",
-    "@eeacms/volto-accordion-block": "11.0.0",
-    "@eeacms/volto-matomo": "^5.0.0",
-    "@eeacms/volto-statistic-block": "4.1.0",
-    "@kitconcept/volto-button-block": "2.3.1",
-    "@kitconcept/volto-light-theme": "^4.0.0",
-    "@kitconcept/volto-separator-block": "^4.1.1",
-    "@kitconcept/volto-slider-block": "^6.3.1",
-    "@kitconcept/volto-social-blocks": "1.0.0-alpha.4",
-    "@mbarde/volto-image-crop-widget": "0.5.1",
-    "@plone-collective/volto-eventbrite-block": "^1.0.0-alpha.2",
-    "@plonegovbr/volto-network-block": "^0.2.0",
-    "classnames": "2.2.6",
+    "@eeacms/volto-accordion-block": "13.1.1",
+    "@kitconcept/volto-button-block": "5.1.0",
+    "@kitconcept/volto-light-theme": "8.1.4",
+    "@kitconcept/volto-separator-block": "5.1.0",
+    "@kitconcept/volto-slider-block": "7.1.0",
+    "@loadable/component": "5.16.7",
+    "classnames": "^2.5.1",
     "embla-carousel-autoplay": "^8.0.0",
     "embla-carousel-react": "^8.0.0",
+    "react-dnd": "5.0.0",
+    "react-dnd-html5-backend": "5.0.1",
     "react-lazy-load-image-component": "^1.6.2",
-    "volto-form-block": "^3.9.1",
-    "volto-subblocks": "^2.1.0"
+    "volto-form-block": "3.19.0",
+    "volto-subblocks": "2.1.1"
   },
   "peerDependencies": {
     "react": "18.2.0",
@@ -70,6 +61,7 @@
     "@plone/scripts": "^3.6.1",
     "release-it": "^17.1.1",
     "semantic-ui-react": "2.1.5",
-    "semanticui-react": "^0.2.3"
+    "semanticui-react": "^0.2.3",
+    "vitest": "catalog:"
   }
 }

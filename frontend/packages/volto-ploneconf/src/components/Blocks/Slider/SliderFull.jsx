@@ -1,4 +1,5 @@
 import React from 'react';
+import VoltoImage from '@plone/volto/components/theme/Image/Image';
 import { useIntl, defineMessages } from 'react-intl';
 import { Container } from '@plone/components';
 import { Icon, MaybeWrap, UniversalLink } from '@plone/volto/components';
@@ -29,7 +30,7 @@ const messages = defineMessages({
   },
 });
 
-const DefaultImage = (props) => <img {...props} alt={props.alt || ''} />;
+const DefaultImage = (props) => <VoltoImage {...props} alt={props.alt || ''} />;
 
 const SliderBodyFull = ({
   index,
@@ -76,7 +77,7 @@ const SliderBodyFull = ({
       {!href && isEditMode && (
         <Message className={'editForm'}>
           <Container className="grid-teaser-item default">
-            <img src={imageBlockSVG} alt="" />
+            <VoltoImage src={imageBlockSVG} alt="" />
             <p>{intl.formatMessage(messages.PleaseChooseContent)}</p>
             <div className="toolbar-inner">
               <Button.Group>
