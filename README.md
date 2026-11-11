@@ -15,7 +15,9 @@ its layout and some of its tooling.
   `frontend/packages/volto-ploneconf` (logo, header, footer, navigation, theme
   customizations). Its Header, Footer, Navigation, MobileNavigation and Tags
   replace the theme's through `config.settings.vlt.components` (see its
-  `src/index.js`); there are no shadowed theme files. Volto itself is checked
+  `src/index.js`); there are no shadowed theme files. The image gallery
+  listing uses the add-on's copy of Volto's template, which adds alternative
+  text (`components/Blocks/Listing/ImageGallery.jsx`). Volto itself is checked
   out into `frontend/core` at the tag in `frontend/mrs.developer.json`;
   dependencies are locked in `frontend/pnpm-lock.yaml`.
 - `devops/production/compose.yml`: the production stack.
@@ -117,6 +119,10 @@ container.
 
 3. Check the site. If something is wrong, set the previous tag and run the same
    two commands.
+4. Each frontend image takes about 1.4 GB and the server disk is small: once the
+   new build is fine, remove the older images (keep the previous one for a
+   rollback), e.g. `docker image rm ghcr.io/tkimnguyen/waverobotics.com-frontend:sha-<old>`.
+   GitHub keeps them, so `docker compose pull` can fetch one again.
 
 CI builds a new image only for the side that changed (`backend/` or `frontend/`).
 When only one side has a new tag, set `BACKEND_TAG` or `FRONTEND_TAG` in `.env`
