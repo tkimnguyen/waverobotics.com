@@ -1,30 +1,49 @@
 # syntax=docker/dockerfile:1
-ARG VOLTO_VERSION
-# TODO: Replace with
-# FROM plone/frontend-builder:${VOLTO_VERSION}
-# when the main image is ready
-FROM ghcr.io/kitconcept/frontend-builder:${VOLTO_VERSION} AS builder
+# Volto frontend for waverobotics.com.
+# Builds the same way as a local checkout: Volto core from mrs.developer.json,
+# dependencies from pnpm-lock.yaml (frozen), then a production bundle.
+ARG NODE_IMAGE=node:22.23.4-bookworm-slim
 
-COPY --chown=node packages/volto-ploneconf /app/packages/volto-ploneconf
-COPY --chown=node volto.config.js /app/
-COPY --chown=node package.json /app/package.json.temp
+FROM ${NODE_IMAGE} AS builder
 
-RUN --mount=type=cache,id=pnpm,target=/app/.pnpm-store,uid=1000 <<EOT
-     python3 -c "import json; data = json.load(open('package.json.temp')); deps = data['dependencies']; data['dependencies'].update(deps); json.dump(data, open('package.json', 'w'), indent=2)"
-     rm package.json.temp
-     pnpm install && pnpm build:deps
-     pnpm build
-     pnpm install --prod
+RUN <<EOT
+    set -e
+    apt-get update
+    apt-get install -y --no-install-recommends ca-certificates git python3 make g++
+    rm -rf /var/lib/apt/lists/*
+    corepack enable
+    mkdir /app && chown node:node /app
 EOT
 
-# TODO: Replace with
-# FROM plone/frontend-prod-config:${VOLTO_VERSION}
-# when the main image is ready
-FROM ghcr.io/kitconcept/frontend-prod-config:${VOLTO_VERSION}
+ENV COREPACK_ENABLE_DOWNLOAD_PROMPT=0
+WORKDIR /app
+USER node
 
-LABEL maintainer="Plone Foundation <collective@plone.org>" \
-      org.label-schema.name="ghcr.io/plone/ploneconf-2024-frontend" \
-      org.label-schema.description="Project Title frontend image." \
-      org.label-schema.vendor="Plone Foundation"
+COPY --chown=node . .
 
-COPY --from=builder /app/ /app/
+RUN --mount=type=cache,id=pnpm,target=/home/node/pnpm-store,uid=1000 <<EOT
+    set -e
+    pnpm config set store-dir /home/node/pnpm-store
+    pnpm dlx mrs-developer missdev --no-config --fetch-https
+    pnpm install --frozen-lockfile
+    pnpm build:deps
+    pnpm build
+    pnpm install --prod --frozen-lockfile
+EOT
+
+
+FROM ${NODE_IMAGE}
+
+LABEL org.opencontainers.image.title="waverobotics.com frontend" \
+      org.opencontainers.image.description="Volto frontend for waverobotics.com"
+
+ENV NODE_ENV=production \
+    PORT=3000
+
+# Owned by root and read-only for the node user: nothing is written at runtime.
+COPY --from=builder /app /app
+
+WORKDIR /app/core/packages/volto
+USER node
+EXPOSE 3000
+CMD ["node", "build/server.js"]

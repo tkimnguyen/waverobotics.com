@@ -1,6 +1,8 @@
 *.log
+**/node_modules
+core
 build
 cache
 cypress
 Dockerfile
-node_modules
+.storybook

@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-ARG PLONE_VERSION=6.0.11
+ARG PLONE_VERSION=6.0.16
 FROM plone/server-builder:${PLONE_VERSION} AS builder
 
 WORKDIR /app
@@ -27,10 +27,8 @@ EOT
 
 FROM plone/server-prod-config:${PLONE_VERSION}
 
-LABEL maintainer="Plone Foundation <collective@plone.org>" \
-      org.label-schema.name="ghcr.io/plone/ploneconf-2024-backend" \
-      org.label-schema.description="Project Title backend image." \
-      org.label-schema.vendor="Plone Foundation"
+LABEL org.opencontainers.image.title="waverobotics.com backend" \
+      org.opencontainers.image.description="Plone backend for waverobotics.com"
 
 # Copy /app from builder
 COPY --from=builder /app /app
