@@ -48,6 +48,20 @@ const SliderBodyFull = ({
   const Image = config.getComponent('Image').component || DefaultImage;
   const { openExternalLinkInNewTab } = config.settings;
 
+  // Slides without any text of their own (photo-only slides): the photo gets
+  // the image's description as alternative text, stored on the slide when the
+  // image was chosen. Without one, the slide is hidden from screen readers
+  // rather than announced as a link without a name (it is not reachable by
+  // keyboard either: tabIndex -1).
+  const slideText = data?.nav_title || data?.title || data?.description;
+  const showsButton = !data.hideButton;
+  const photoAlt =
+    slideText || showsButton
+      ? ''
+      : (href?.Description || href?.description || '').trim();
+  const hideFromScreenReaders =
+    !isEditMode && !slideText && !showsButton && !photoAlt;
+
   const handleClick = () => {
     openObjectBrowser({
       onSelectItem: (url, document) => {
@@ -95,7 +109,10 @@ const SliderBodyFull = ({
         </Message>
       )}
       {href && (
-        <Container className="teaser-item top">
+        <Container
+          className="teaser-item top"
+          aria-hidden={hideFromScreenReaders || undefined}
+        >
           <MaybeWrap
             condition={!isEditMode}
             as={UniversalLink}
@@ -118,7 +135,7 @@ const SliderBodyFull = ({
                 <Image
                   item={image || href}
                   imageField={image ? image.image_field : href.image_field}
-                  alt=""
+                  alt={photoAlt}
                   loading="lazy"
                   responsive={true}
                 />
