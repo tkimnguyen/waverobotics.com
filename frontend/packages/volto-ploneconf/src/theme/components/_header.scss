@@ -152,3 +152,10 @@ body header.header-wrapper .header nav.navigation .conf-item .item {
     color: var(--main-color);
   }
 }
+
+// The mobile menu's language list lost its list-style reset in
+// volto-light-theme 8 and showed a stray bullet.
+.mobile-tools {
+  padding: 0;
+  list-style: none;
+}
