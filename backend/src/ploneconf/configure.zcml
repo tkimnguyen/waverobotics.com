@@ -19,7 +19,6 @@
 
   <include file="permissions.zcml" />
 
-  <include package=".exportimport" />
   <include package=".indexers" />
   <include package=".vocabularies" />
   <include package=".behaviors" />

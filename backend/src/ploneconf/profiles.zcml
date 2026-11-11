@@ -13,15 +13,6 @@
       />
 
   <genericsetup:registerProfile
-      name="initial"
-      title="Plone Conference 2024: Initial content"
-      description="Initial content for our website."
-      provides="Products.GenericSetup.interfaces.EXTENSION"
-      directory="profiles/initial"
-      pre_handler=".setuphandlers.populate_portal"
-      />
-
-  <genericsetup:registerProfile
       name="oauth"
       title="Plone Conference 2024: Production pas.plugins.authomatic"
       description="Install Production pas.plugins.authomatic."
