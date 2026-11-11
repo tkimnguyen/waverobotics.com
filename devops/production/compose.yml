@@ -7,7 +7,9 @@
 # Usage, from this directory on the server:
 #   TAG=sha-abc1234 docker compose pull
 #   TAG=sha-abc1234 docker compose up -d
-# TAG defaults to "latest" (the newest build of main).
+# TAG defaults to "latest" (the newest build of main). CI builds an image only
+# for the side that changed, so BACKEND_TAG and FRONTEND_TAG override TAG for
+# one service each.
 #
 # DATA_DIR is the existing Plone instance data (filestorage/, blobs/, cache/).
 
@@ -26,7 +28,7 @@ x-logging: &logging
 
 services:
   backend:
-    image: ghcr.io/tkimnguyen/waverobotics.com-backend:${TAG:-latest}
+    image: ghcr.io/tkimnguyen/waverobotics.com-backend:${BACKEND_TAG:-${TAG:-latest}}
     restart: unless-stopped
     # Run as the host's plone user (1000). Running as root would make the
     # image's entrypoint chown everything under /data to its own uid 500.
@@ -51,7 +53,7 @@ services:
     logging: *logging
 
   frontend:
-    image: ghcr.io/tkimnguyen/waverobotics.com-frontend:${TAG:-latest}
+    image: ghcr.io/tkimnguyen/waverobotics.com-frontend:${FRONTEND_TAG:-${TAG:-latest}}
     restart: unless-stopped
     environment:
       TZ: *tz
