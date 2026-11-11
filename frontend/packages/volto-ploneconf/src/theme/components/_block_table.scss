@@ -1,0 +1,12 @@
+// volto-light-theme 8 makes tables as wide as the layout (1440px) with a light
+// header row; keep them at the content width with the dark header, as before.
+#page-document .blocks-group-wrapper > .block.slate-table {
+  max-width: min(var(--default-container-width), calc(100% - 40px));
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.block.slate-table table.slate-table-block thead th {
+  background-color: #555;
+  color: #fff;
+}

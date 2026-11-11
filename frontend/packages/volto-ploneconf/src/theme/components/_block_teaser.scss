@@ -122,15 +122,15 @@
   }
 
   &.primary {
-    background-color: var(--primary-color);
+    background-color: var(--wave-primary-color);
   }
 
   &.secondary {
-    background-color: var(--secondary-color);
+    background-color: var(--wave-secondary-color);
   }
 
   &.tertiary {
-    background-color: var(--tertiary-color);
+    background-color: var(--wave-tertiary-color);
   }
 
   &:hover {

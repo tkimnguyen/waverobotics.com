@@ -86,3 +86,20 @@
     }
   }
 }
+
+// volto-light-theme 8 renders grid listings and grid teasers with its Card
+// component; their titles were centered before (as all h2s on the site).
+.block.listing.grid .card .card-summary .title,
+.block.gridBlock .block.teaser .card .card-summary .title {
+  text-align: center;
+}
+
+// Volto 19 puts the image gallery's download link below the gallery, at the
+// full block width; keep it in the content column, right-aligned and small.
+.block.listing.imageGallery .image-gallery-download {
+  max-width: var(--default-container-width);
+  margin-right: auto;
+  margin-left: auto;
+  font-size: var(--font-size-2xs);
+  text-align: right;
+}

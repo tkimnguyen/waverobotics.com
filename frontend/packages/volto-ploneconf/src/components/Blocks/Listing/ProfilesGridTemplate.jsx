@@ -35,7 +35,7 @@ const ProfilesTemplate = ({ items, linkTitle, linkHref, isEditMode }) => {
                   {image_url ? (
                     <Image src={image_url} alt="" className="person-image" />
                   ) : (
-                    <img
+                    <Image
                       src={DefaultImageSVG}
                       alt=""
                       className="person-image"

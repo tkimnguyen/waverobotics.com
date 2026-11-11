@@ -2,7 +2,7 @@
 
 Website of [Wave Robotics](https://waverobotics.com), FIRST Robotics team 2826.
 
-Plone 6.2.3 backend + Volto 18.36.0 frontend. The project started from
+Plone 6.2.3 backend + Volto 19.7.0 frontend. The project started from
 [plone/2024.ploneconf.org](https://github.com/plone/2024.ploneconf.org) and keeps
 its layout and some of its tooling.
 
@@ -11,17 +11,20 @@ its layout and some of its tooling.
 - `backend/`: Plone, installed with pip and mxdev (no buildout). Policy package
   `ploneconf` in `backend/src/ploneconf`. Versions are pinned in
   `backend/constraints.txt` (the Plone release constraints plus add-ons).
-- `frontend/`: Volto. The site's add-on is `frontend/packages/volto-ploneconf`
-  (logo, header, footer, theme customizations). Volto itself is checked out into
-  `frontend/core` at the tag in `frontend/mrs.developer.json`; dependencies are
-  locked in `frontend/pnpm-lock.yaml`.
+- `frontend/`: Volto with volto-light-theme. The site's add-on is
+  `frontend/packages/volto-ploneconf` (logo, header, footer, navigation, theme
+  customizations). Its Header, Footer, Navigation, MobileNavigation and Tags
+  replace the theme's through `config.settings.vlt.components` (see its
+  `src/index.js`); there are no shadowed theme files. Volto itself is checked
+  out into `frontend/core` at the tag in `frontend/mrs.developer.json`;
+  dependencies are locked in `frontend/pnpm-lock.yaml`.
 - `devops/production/compose.yml`: the production stack.
 - `.github/workflows/`: checks and Docker image builds.
 
 ## Local development
 
 Requirements: Python 3.10 to 3.13 (CI and the Docker image use 3.13), Node 22
-(Volto 18.36 supports Node 20 and 22), pnpm 9.15.9 (via `corepack enable`), git.
+(Volto 19 supports Node 22 and 24), pnpm 10.20.0 (via `corepack enable`), git.
 
 ### Backend
 

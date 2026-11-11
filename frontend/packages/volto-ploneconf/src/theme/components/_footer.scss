@@ -33,3 +33,12 @@
     }
   }
 }
+
+// volto-light-theme 8 pads every footer container by 80px.
+#footer > .container.footer:not(:empty) {
+  padding: 2rem;
+}
+
+#footer > .container.signature:not(:empty) {
+  padding: 1rem;
+}

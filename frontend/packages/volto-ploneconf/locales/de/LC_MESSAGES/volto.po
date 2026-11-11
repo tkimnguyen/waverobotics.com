@@ -11,6 +11,11 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
+#. Default: "Back"
+#: components/MobileNavigation/MobileNavigation
+msgid "Back"
+msgstr ""
+
 #. Default: "Be the First!"
 #: components/Blocks/SponsorLevel/DefaultView
 msgid "Be the First!"
@@ -27,6 +32,7 @@ msgid "CTA Label"
 msgstr ""
 
 #. Default: "Close menu"
+#: components/MobileNavigation/MobileNavigation
 #: components/Navigation/Navigation
 msgid "Close menu"
 msgstr ""
@@ -46,9 +52,20 @@ msgstr ""
 msgid "Front Page"
 msgstr ""
 
+#. Default: "Home"
+#: components/MobileNavigation/MobileNavigation
+msgid "Home"
+msgstr ""
+
 #. Default: "Open menu"
+#: components/MobileNavigation/MobileNavigation
 #: components/Navigation/Navigation
 msgid "Open menu"
+msgstr ""
+
+#. Default: "Overview"
+#: components/MobileNavigation/MobileNavigation
+msgid "Overview"
 msgstr ""
 
 #. Default: "Please choose an existing content as source for this element"

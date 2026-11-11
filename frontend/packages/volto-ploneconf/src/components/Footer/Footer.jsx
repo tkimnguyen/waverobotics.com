@@ -5,7 +5,7 @@ import { FormattedMessage, injectIntl } from 'react-intl';
 import { UniversalLink } from '@plone/volto/components';
 import { Container } from '@plone/components';
 import { flattenToAppURL } from '@plone/volto/helpers';
-import FooterLinks from '@plonegovbr/volto-network-block/components/FooterLinks/FooterLinks';
+import SocialLinks from '../SocialLinks/SocialLinks';
 
 /**
  * Component to display the footer.
@@ -19,7 +19,7 @@ const Footer = ({ intl }) => {
     <footer id="footer">
       <div className="footerDecoration"></div>
       <Container layout className="footer">
-        <FooterLinks />
+        <SocialLinks />
         <ul>
           {/* wrap in div for a11y reasons: listitem role cannot be on the <a> element directly */}
           {siteActions?.length

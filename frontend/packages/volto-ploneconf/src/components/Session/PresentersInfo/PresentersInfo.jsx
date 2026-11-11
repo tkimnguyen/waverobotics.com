@@ -4,6 +4,7 @@
  */
 
 import React from 'react';
+import VoltoImage from '@plone/volto/components/theme/Image/Image';
 import { flattenToAppURL } from '@plone/volto/helpers';
 import DefaultImageSVG from '@plone/volto/components/manage/Blocks/Listing/default-image.svg';
 import { Link } from 'react-router-dom';
@@ -22,10 +23,10 @@ const PresentersInfo = (props) => {
               trigger={
                 <div className="speakers-preview-image">
                   {!item?.image?.download && (
-                    <img src={DefaultImageSVG} alt="" />
+                    <VoltoImage src={DefaultImageSVG} alt="" />
                   )}
                   {item?.image?.download && (
-                    <img
+                    <VoltoImage
                       src={flattenToAppURL(item.image.download)}
                       alt={item.title}
                     />

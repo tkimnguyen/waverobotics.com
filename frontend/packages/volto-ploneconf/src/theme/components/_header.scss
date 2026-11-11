@@ -137,3 +137,18 @@
     }
   }
 }
+
+// volto-light-theme 8 caps the logo at 80px and colors navigation items with
+// --header-foreground; keep the site's logo size and blue active/hover item.
+.header-wrapper .header .logo-nav-wrapper .logo a img.logoConf.main {
+  width: 178px;
+  height: 100px;
+  max-height: none;
+}
+
+body header.header-wrapper .header nav.navigation .conf-item .item {
+  &.active,
+  &:hover {
+    color: var(--main-color);
+  }
+}

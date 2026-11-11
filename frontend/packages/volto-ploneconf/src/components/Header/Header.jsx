@@ -1,10 +1,10 @@
 // SemanticUI-free pre-@plone/components
 import PropTypes from 'prop-types';
 import { Container } from '@plone/components';
-import MobileNavigation from '@kitconcept/volto-light-theme/components/MobileNavigation/MobileNavigation';
+import MobileNavigation from '../MobileNavigation/MobileNavigation';
 import Logo from '../Logo/Logo';
 import LanguageSelector from './LanguageSelector';
-import { Navigation } from '@plone/volto/components';
+import Navigation from '../Navigation/Navigation';
 
 const Header = (props) => {
   const { pathname } = props;

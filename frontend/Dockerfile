@@ -28,7 +28,8 @@ RUN --mount=type=cache,id=pnpm,target=/home/node/pnpm-store,uid=1000 <<EOT
     pnpm install --frozen-lockfile
     pnpm build:deps
     pnpm build
-    pnpm install --prod --frozen-lockfile
+    # pnpm 10 asks before replacing node_modules; CI=1 answers for it.
+    CI=1 pnpm install --prod --frozen-lockfile
 EOT
 
 

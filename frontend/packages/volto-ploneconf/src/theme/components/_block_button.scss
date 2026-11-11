@@ -1,16 +1,24 @@
+// volto-button-block 5 renders the button as `a.button` (it used to be a
+// `button.ui.button` inside the link). Buttons without a link
+// (CAD, Impact on /en/member-resources/frc) are a `button.noLink`.
 .block.__button {
   .button.container {
-    button.ui.button {
+    a.button,
+    button.noLink {
+      display: inline-block;
       padding: 10px 24px;
       border: 1px solid var(--main-color);
       border-radius: 10px;
       background-color: var(--main-color);
       color: var(--reverse-color);
       font-size: 22px;
+      font-weight: 700;
       line-height: 30px;
+      text-decoration: none;
 
       &:hover {
         @include animate-hover();
+        color: var(--reverse-color);
       }
     }
   }
@@ -18,8 +26,20 @@
 
 .block.gridBlock {
   .block.__button {
-    button.ui.button {
+    // The button container is a CSS grid in volto-button-block 5; let the
+    // wrapper take the column width so the 80% minimum applies again.
+    .align {
+      width: 100%;
+    }
+
+    &.left .align {
+      text-align: left;
+    }
+
+    a.button,
+    button.noLink {
       min-width: 80%;
+      text-align: center;
     }
   }
 }
