@@ -27,7 +27,9 @@
         z-index: 1;
         top: 0;
         display: block;
-        width: 40%;
+        // At least wide enough that the slanted edge stays clear of the
+        // 570px text box (white text needs the dark background for contrast).
+        width: max(40%, 760px);
         height: calc(100vh - 220px);
         min-height: 600px;
         background: linear-gradient(

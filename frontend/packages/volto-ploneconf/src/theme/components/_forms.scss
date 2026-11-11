@@ -1,0 +1,14 @@
+// Form fields on the site (e.g. the sponsor and contact forms): Semantic UI's
+// default border (#c7d5d8, 1.5:1 on white) makes the boxes hard to see. WCAG
+// 1.4.11 asks for 3:1; #767676 is 4.5:1. Only on pages, not in the editor UI.
+#page-document .ui.form {
+  input:not([type='checkbox']):not([type='radio']):not([type='submit']):not(
+      [type='button']
+    ),
+  textarea,
+  select,
+  .ui.input > input,
+  .ui.selection.dropdown {
+    border-color: #767676;
+  }
+}

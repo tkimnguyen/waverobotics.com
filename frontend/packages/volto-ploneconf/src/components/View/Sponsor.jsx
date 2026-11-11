@@ -23,15 +23,19 @@ const SponsorView = ({ content }) => {
   return (
     <Container id="page-document" className="view-wrapper sponsor-view">
       {hasImage ? (
-        <div id={'sponsorLogo'} className="block image align center">
-          <Image
-            item={content}
-            imageField={'image'}
-            alt={caption}
-            title={caption}
-            responsive={true}
-          />
-        </div>
+        <>
+          {/* The logo stands in for the heading; keep one for screen readers. */}
+          <h1 className="documentFirstHeading visually-hidden">{title}</h1>
+          <div id={'sponsorLogo'} className="block image align center">
+            <Image
+              item={content}
+              imageField={'image'}
+              alt={caption || title}
+              title={caption}
+              responsive={true}
+            />
+          </div>
+        </>
       ) : (
         <h1 className="documentFirstHeading">{title}</h1>
       )}
