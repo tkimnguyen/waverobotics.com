@@ -19,6 +19,7 @@ its layout and some of its tooling.
   out into `frontend/core` at the tag in `frontend/mrs.developer.json`;
   dependencies are locked in `frontend/pnpm-lock.yaml`.
 - `devops/production/compose.yml`: the production stack.
+- `devops/production/backup/`: the nightly content backup (script and systemd units).
 - `.github/workflows/`: checks and Docker image builds.
 
 ## Local development
@@ -145,6 +146,31 @@ cannot run on the migrated database. Plan a short maintenance window:
 
 When scripting `docker compose run` over ssh, redirect stdin (`</dev/null`):
 otherwise it consumes the rest of the script.
+
+### Backups
+
+`devops/production/backup/plone-backup.sh` backs up the site content every night
+at 03:15 (server time), run by the systemd units next to it:
+
+- the database: a full, compressed `repozo` backup of `Data.fs`, made with the
+  current backend image in a throwaway container that mounts the data read-only;
+- the blobs: an `rsync` copy per night, with unchanged files hard-linked to the
+  previous night's copy, so each night only adds what changed.
+
+It keeps 7 nights in `/home/plone/backups`, readable only by `plone` (the
+backups include user accounts), and skips the run when less than 1 GB is free.
+
+Install or update on the server, as root:
+
+```shell
+install -m 750 plone-backup.sh /usr/local/sbin/plone-backup.sh
+install -m 644 plone-backup.service plone-backup.timer /etc/systemd/system/
+systemctl daemon-reload
+systemctl enable --now plone-backup.timer
+```
+
+Check: `cat /home/plone/backups/last-success`, `journalctl -u plone-backup`.
+Restoring is described at the top of the script.
 
 ## Credits
 
