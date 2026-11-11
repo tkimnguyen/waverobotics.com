@@ -9,15 +9,18 @@ import PropTypes from 'prop-types';
 import { Container } from '@plone/components';
 import { Icon } from '@plone/volto/components';
 import tagSVG from '@plone/volto/icons/tag.svg';
+import config from '@plone/registry';
 
 /**
  * Tags component class.
  * @function Tags
- * @param {array} tags Array of tags.
+ * @param {Object} content Content object; its subjects are the tags. Volto 18
+ *   renders this from the belowContent slot, which passes `content`.
+ * @param {array} tags Array of tags (older call style, still accepted).
  * @returns {string} Markup of the component.
  */
-const Tags = ({ tags }) =>
-  tags && tags.length > 0 ? (
+const Tags = ({ content, tags = content?.subjects }) =>
+  config.settings.showTags !== false && tags && tags.length > 0 ? (
     <Container layout className="tags">
       <Icon name={tagSVG} />
       {tags.map((tag, i) => (
@@ -39,6 +42,9 @@ const Tags = ({ tags }) =>
  * @static
  */
 Tags.propTypes = {
+  content: PropTypes.shape({
+    subjects: PropTypes.arrayOf(PropTypes.string),
+  }),
   tags: PropTypes.arrayOf(PropTypes.string),
 };
 
@@ -48,7 +54,7 @@ Tags.propTypes = {
  * @static
  */
 Tags.defaultProps = {
-  tags: null,
+  content: null,
 };
 
 export default Tags;
