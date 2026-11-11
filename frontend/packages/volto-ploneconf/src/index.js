@@ -8,6 +8,7 @@ import SponsorLevelView from './components/Blocks/SponsorLevel/View';
 import { sponsorLevelRestrict } from './components/Blocks/SponsorLevel/utils';
 /// Listing block variations
 import ProfilesTemplate from './components/Blocks/Listing/ProfilesGridTemplate';
+import ImageGalleryTemplate from './components/Blocks/Listing/ImageGallery';
 
 // Teaser
 import TeaserDefaultTemplate from './components/Blocks/Teaser/TeaserDefault';
@@ -149,7 +150,11 @@ const applyConfig = (config) => {
 
   // Listing Variations
   config.blocks.blocksConfig.listing.variations = [
-    ...config.blocks.blocksConfig.listing.variations,
+    ...config.blocks.blocksConfig.listing.variations.map((variation) =>
+      variation.id === 'imageGallery'
+        ? { ...variation, template: ImageGalleryTemplate }
+        : variation,
+    ),
     {
       id: 'profiles',
       title: 'Person Profiles',

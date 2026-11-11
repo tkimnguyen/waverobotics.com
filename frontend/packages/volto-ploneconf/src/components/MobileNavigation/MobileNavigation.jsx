@@ -1,7 +1,7 @@
 import React from 'react';
 import { defineMessages, useIntl } from 'react-intl';
 import { useSelector } from 'react-redux';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import cx from 'classnames';
 
 import { CSSTransition } from 'react-transition-group';
@@ -36,7 +36,6 @@ const MobileNavigation = (props) => {
   const menus = React.useRef(null);
   const currentLang = useSelector((state) => state.intl.locale);
   const items = useSelector((state) => state.navigation.items || []);
-  const history = useHistory();
 
   const Footer = () => (
     <ul className="mobile-tools">
@@ -144,18 +143,25 @@ const MobileNavigation = (props) => {
                 <li
                   key={section.url}
                   className={section.url === props.pathname ? 'current' : ''}
-                  onClick={(e) => {
-                    if (section.items.length > 0) {
-                      openSecondaryMenu(index);
-                    } else {
-                      history.push(section.url);
-                      return closeMenus(e);
-                    }
-                  }}
-                  role="presentation"
                 >
-                  {section.nav_title || section.title}
-                  {section.items.length > 0 && <Icon name={arrowRightSVG} />}
+                  {section.items.length > 0 ? (
+                    <button
+                      type="button"
+                      className="section-toggle"
+                      onClick={() => openSecondaryMenu(index)}
+                    >
+                      {section.nav_title || section.title}
+                      <Icon name={arrowRightSVG} />
+                    </button>
+                  ) : (
+                    <Link
+                      to={section.url}
+                      className="section-link"
+                      onClick={(e) => closeMenus(e)}
+                    >
+                      {section.nav_title || section.title}
+                    </Link>
+                  )}
                   <CSSTransition
                     in={
                       isSecondaryMobileMenuOpen && secondaryMenuOpened === index
@@ -198,19 +204,24 @@ const MobileNavigation = (props) => {
                                   ? 'current'
                                   : ''
                               }
-                              onClick={(e) => {
-                                if (subsection.items.length > 0) {
-                                  openTertiaryMenu(index);
-                                } else {
-                                  history.push(subsection.url);
-                                  return closeMenus(e);
-                                }
-                              }}
-                              role="presentation"
                             >
-                              {subsection.nav_title || subsection.title}
-                              {subsection.items.length > 0 && (
-                                <Icon name={arrowRightSVG} />
+                              {subsection.items.length > 0 ? (
+                                <button
+                                  type="button"
+                                  className="section-toggle"
+                                  onClick={() => openTertiaryMenu(index)}
+                                >
+                                  {subsection.nav_title || subsection.title}
+                                  <Icon name={arrowRightSVG} />
+                                </button>
+                              ) : (
+                                <Link
+                                  to={subsection.url}
+                                  className="section-link"
+                                  onClick={(e) => closeMenus(e)}
+                                >
+                                  {subsection.nav_title || subsection.title}
+                                </Link>
                               )}
                               <CSSTransition
                                 in={

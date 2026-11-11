@@ -191,3 +191,56 @@ body header.header-wrapper .header nav.navigation .conf-item .item {
     top: 143px;
   }
 }
+
+// Desktop drop-down: the hidden "—" marker sits outside the link, so the
+// keyboard focus outline was drawn in two pieces. Show it only where it is
+// visible (the current page).
+body
+  .header-wrapper
+  .header
+  nav.navigation
+  .submenu-wrapper
+  .submenu
+  li
+  a:not(.current)
+  .left-arrow {
+  display: none;
+}
+
+// Phone menu: entries with a submenu are buttons (keyboard and screen reader
+// accessible); make them look like the plain entries and links around them.
+.mobile-nav ul.sections li > button.section-toggle {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0;
+  border: 0;
+  margin: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+  text-align: left;
+}
+
+// Entries without a submenu are links; keep the plain entries' line height
+// (the theme gives menu links 36px).
+.mobile-nav ul.sections li > a.section-link {
+  line-height: inherit;
+}
+
+// Text only for screen readers (e.g. the heading on sponsor pages).
+.visually-hidden {
+  position: absolute !important;
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  border: 0;
+  margin: -1px;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
