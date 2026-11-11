@@ -2,7 +2,7 @@
 
 Website of [Wave Robotics](https://waverobotics.com), FIRST Robotics team 2826.
 
-Plone 6.0.16 backend + Volto 18.36.0 frontend. The project started from
+Plone 6.2.3 backend + Volto 18.36.0 frontend. The project started from
 [plone/2024.ploneconf.org](https://github.com/plone/2024.ploneconf.org) and keeps
 its layout and some of its tooling.
 
@@ -20,8 +20,8 @@ its layout and some of its tooling.
 
 ## Local development
 
-Requirements: Python 3.11 or 3.12, Node 22 (Volto 18.36 supports Node 20 and 22),
-pnpm 9.15.9 (via `corepack enable`), git.
+Requirements: Python 3.10 to 3.13 (CI and the Docker image use 3.13), Node 22
+(Volto 18.36 supports Node 20 and 22), pnpm 9.15.9 (via `corepack enable`), git.
 
 ### Backend
 
@@ -122,7 +122,7 @@ cannot run on the migrated database. Plan a short maintenance window:
 1. Pull the new images first (`docker compose pull`), with the site still up.
 2. Try the migration on a copy of the data, using a separate compose project and
    port, with `devops/production/upgrade_site.py` (it runs
-   `portal_migration.upgrade()` for each site; usage is in the file):
+   the core and add-on upgrade steps for each site; usage is in the file):
 
    ```shell
    DATA_DIR=/path/to/copy BACKEND_PORT=8090 docker compose -p trial run --rm --no-deps \

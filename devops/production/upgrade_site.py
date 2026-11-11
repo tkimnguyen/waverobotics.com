@@ -1,4 +1,4 @@
-"""Run Plone's core upgrade steps on every Plone site in the database.
+"""Run Plone's upgrade steps on every Plone site in the database.
 
 Run it inside the backend container (the entrypoint's `run` command calls
 `zconsole run`), with the backend itself stopped:
@@ -7,9 +7,9 @@ Run it inside the backend container (the entrypoint's `run` command calls
         -v "$PWD/upgrade_site.py:/scripts/upgrade_site.py:ro" \
         backend run /scripts/upgrade_site.py </dev/null
 
-Prints the version before and after, and lists installed add-on profiles that
-still have upgrade steps (run those from the Add-ons control panel, or extend
-this script). Commits only if the core upgrade succeeds.
+Runs the core (portal_migration) upgrade first, then the pending upgrade steps
+of every installed add-on profile, and prints the versions before and after.
+Any error aborts the transaction, so nothing is committed.
 """
 
 from AccessControl.SecurityManagement import newSecurityManager
@@ -23,6 +23,17 @@ import transaction
 
 app = makerequest(app)  # noqa: F821 (provided by zconsole run)
 newSecurityManager(None, system)
+
+
+def pending_addon_upgrades(setup):
+    return [
+        profile_id
+        for profile_id in setup.listProfilesWithUpgrades()
+        # "unknown" means the profile was never installed on this site.
+        if setup.getLastVersionForProfile(profile_id) != "unknown"
+        and setup.listUpgrades(profile_id)
+    ]
+
 
 for site_id, site in app.objectItems():
     if not isinstance(site, PloneSite):
@@ -40,12 +51,11 @@ for site_id, site in app.objectItems():
         f"  needUpgrading={migration.needUpgrading()}"
     )
     setup = site.portal_setup
-    pending = [
-        (profile_id, len(setup.listUpgrades(profile_id)))
-        for profile_id in setup.listProfilesWithUpgrades()
-        # "unknown" means the profile was never installed on this site.
-        if setup.getLastVersionForProfile(profile_id) != "unknown"
-        and setup.listUpgrades(profile_id)
-    ]
-    print("   installed add-on profiles with pending upgrades:", pending or "none")
+    for profile_id in pending_addon_upgrades(setup):
+        before = setup.getLastVersionForProfile(profile_id)
+        setup.upgradeProfile(profile_id)
+        after = setup.getLastVersionForProfile(profile_id)
+        print(f"   {profile_id}: {'.'.join(before)} -> {'.'.join(after)}")
+    remaining = pending_addon_upgrades(setup)
+    print("   add-on profiles still pending:", remaining or "none")
     transaction.commit()

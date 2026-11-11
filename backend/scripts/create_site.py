@@ -1,4 +1,6 @@
 from AccessControl.SecurityManagement import newSecurityManager
+from plone.app.multilingual.setuphandlers import enable_translatable_behavior
+from plone.app.multilingual.setuphandlers import init_pam
 from ploneconf.interfaces import IPloneconfLayer
 from Products.CMFPlone.factory import _DEFAULT_PROFILE
 from Products.CMFPlone.factory import addPloneSite
@@ -27,9 +29,6 @@ def asbool(s):
 
 
 DELETE_EXISTING = asbool(os.getenv("DELETE_EXISTING"))
-EXAMPLE_CONTENT = asbool(
-    os.getenv("EXAMPLE_CONTENT", "1")
-)  # Create example content by default
 
 app = makerequest(globals()["app"])
 
@@ -45,14 +44,14 @@ newSecurityManager(None, admin)
 
 site_id = "Plone"
 payload = {
-    "title": "Plone Conference 2024",
+    "title": "Wave Robotics",
     "profile_id": _DEFAULT_PROFILE,
     "extension_ids": [
         "ploneconf:default",
     ],
     "setup_content": False,
     "default_language": "en",
-    "portal_timezone": "America/Sao_Paulo",
+    "portal_timezone": "America/Chicago",
 }
 
 if site_id in app.objectIds() and DELETE_EXISTING:
@@ -63,8 +62,10 @@ if site_id in app.objectIds() and DELETE_EXISTING:
 if site_id not in app.objectIds():
     site = addPloneSite(app, site_id, **payload)
     transaction.commit()
-    if EXAMPLE_CONTENT:
-        portal_setup: SetupTool = site.portal_setup
-        portal_setup.runAllImportStepsFromProfile("ploneconf:initial")
-        transaction.commit()
+    # Same multilingual setup as the production site (English and Spanish
+    # language root folders).
+    portal_setup: SetupTool = site.portal_setup
+    init_pam(portal_setup)
+    enable_translatable_behavior(site)
+    transaction.commit()
     app._p_jar.sync()

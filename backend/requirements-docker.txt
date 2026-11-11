@@ -1,2 +1,4 @@
 -c constraints.txt
 Products.PloneHotfix20261110
+# Lets add-ons that still use pkg_resources-style namespaces load on Plone 6.2.
+horse-with-no-namespace
