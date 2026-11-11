@@ -10,7 +10,7 @@ import { sponsorLevelRestrict } from './components/Blocks/SponsorLevel/utils';
 import ProfilesTemplate from './components/Blocks/Listing/ProfilesGridTemplate';
 
 // Teaser
-import TeaserDefaultTemplate from '@plone/volto/components/manage/Blocks/Teaser/DefaultBody';
+import TeaserDefaultTemplate from './components/Blocks/Teaser/TeaserDefault';
 import TeaserFeatured from './components/Blocks/Teaser/TeaserFeatured';
 import TeaserColoredCTA from './components/Blocks/Teaser/TeaserColoredCTA';
 import { ColoredCTAEnhancer } from './components/Blocks/Teaser/coloredCTAschema';
