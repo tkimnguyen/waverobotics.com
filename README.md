@@ -114,6 +114,10 @@ container.
 3. Check the site. If something is wrong, set the previous tag and run the same
    two commands.
 
+CI builds a new image only for the side that changed (`backend/` or `frontend/`).
+When only one side has a new tag, set `BACKEND_TAG` or `FRONTEND_TAG` in `.env`
+instead of `TAG`; each overrides `TAG` for its own service.
+
 ### Upgrading Plone
 
 A new Plone version usually needs a database migration, and the old version
