@@ -1414,6 +1414,9 @@ importers:
       semanticui-react:
         specifier: ^0.2.3
         version: 0.2.3
+      vitest:
+        specifier: 'catalog:'
+        version: 3.2.7(@types/debug@4.1.12)(@types/node@24.19.2)(@vitest/ui@3.2.7)(jiti@2.7.0)(jsdom@28.1.0(@noble/hashes@1.8.0))(less@3.13.1)(lightningcss@1.33.0)(sass@1.77.6)(terser@5.46.0)(yaml@2.4.5)
 
 packages:
 
