@@ -2,6 +2,17 @@
 
 ## 2026-11-11
 
+- Accessibility fixes from an axe check (WCAG 2.2 A/AA): alternative text for
+  image gallery images and sponsor logos, a screen-reader heading on sponsor
+  pages, labelled gallery buttons, darker form field borders, a wider dark
+  panel behind the home slider text, keyboard-usable phone menu entries, and a
+  single focus outline in the desktop drop-down. (#9)
+- Nightly content backup (repozo for the database, rsync for blobs, 7 nights)
+  with its systemd units in `devops/production/backup/`. (#8)
+- Desktop drop-down menu text is black on the theme's grey background
+  (contrast 17.65:1, was 1.19:1). (#7)
+- Teasers whose target the visitor can't see (e.g. a private page) are no
+  longer links to the current page. (#6)
 - Frontend upgraded to Volto 19.7.0 and volto-light-theme 8.1.4. The site's
   header, footer, navigation, mobile menu and tags plug into the theme's
   component registry instead of overriding its files. Unused add-ons removed;
