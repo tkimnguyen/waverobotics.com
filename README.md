@@ -1,109 +1,146 @@
-# 2024 Plone Conference 🚀
+# waverobotics.com
 
-[![Built with Cookiecutter Plone Starter](https://img.shields.io/badge/built%20with-Cookiecutter%20Plone%20Starter-0083be.svg?logo=cookiecutter)](https://github.com/collective/cookiecutter-plone-starter/)
-[![Black code style](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/ambv/black)
-[![Tests](https://github.com/plone/2024.ploneconf.org/actions/workflows/main.yml/badge.svg)](https://github.com/plone/2024.ploneconf.org/actions/workflows/main.yml)
+Website of [Wave Robotics](https://waverobotics.com), FIRST Robotics team 2826.
 
-Site for the 2024 edition of the annual Plone Conference
+Plone 6.0.16 backend + Volto 18.36.0 frontend. The project started from
+[plone/2024.ploneconf.org](https://github.com/plone/2024.ploneconf.org) and keeps
+its layout and some of its tooling.
 
-## Quick Start 🏁
+## Repository layout
 
-### Prerequisites ✅
+- `backend/`: Plone, installed with pip and mxdev (no buildout). Policy package
+  `ploneconf` in `backend/src/ploneconf`. Versions are pinned in
+  `backend/constraints.txt` (the Plone release constraints plus add-ons).
+- `frontend/`: Volto. The site's add-on is `frontend/packages/volto-ploneconf`
+  (logo, header, footer, theme customizations). Volto itself is checked out into
+  `frontend/core` at the tag in `frontend/mrs.developer.json`; dependencies are
+  locked in `frontend/pnpm-lock.yaml`.
+- `devops/production/compose.yml`: the production stack.
+- `.github/workflows/`: checks and Docker image builds.
 
-Ensure you have the following installed:
+## Local development
 
-- Python 3.11 🐍
-- Node 18 🟩
-- yarn 🧶
-- Docker 🐳
+Requirements: Python 3.11 or 3.12, Node 22 (Volto 18.36 supports Node 20 and 22),
+pnpm 9.15.9 (via `corepack enable`), git.
 
-### Installation 🔧
-
-1. Clone the repository:
-
-```shell
-git clone git@github.com:plone/2024.ploneconf.org.git
-cd 2024.ploneconf.org
-```
-
-2. Install both Backend and Frontend:
+### Backend
 
 ```shell
-make install
+cd backend
+make build
+make start        # http://localhost:8080
 ```
 
-### Fire Up the Servers 🔥
-
-1. Create a new Plone site on your first run:
+If the checkout path contains spaces, the Makefile breaks. Use a path without
+spaces (a symlink is fine) and pass it explicitly:
 
 ```shell
-make backend-create-site
+make build BACKEND_FOLDER=/path/without/spaces/backend
 ```
 
-2. Start the Backend at [http://localhost:8080/](http://localhost:8080/):
+`make create-site` creates an empty site; for real content, start from a copy of
+the production data (`instance/var/filestorage` and `instance/var/blobs`).
+
+### Frontend
 
 ```shell
-make backend-start
+cd frontend
+make install      # checks out Volto core, installs dependencies, builds @plone/registry
+make start        # development server on http://localhost:3000
 ```
 
-3. In a new terminal, start the Frontend at [http://localhost:3000/](http://localhost:3000/):
+Production build, as the Docker image does it:
 
 ```shell
-make frontend-start
+pnpm build
+pnpm start:prod   # run from frontend/: the server must start in core/packages/volto
 ```
 
-Voila! Your Plone site should be live and kicking! 🎉
+Set `RAZZLE_INTERNAL_API_PATH` (e.g. `http://localhost:8080/Plone`) and `PORT` to
+point the frontend at another backend or port.
 
-### Local Stack Deployment 📦
+### Checks
 
-Deploy a local `Docker Compose` environment that includes:
-
-- Docker images for Backend and Frontend 🖼️
-- A stack with a Traefik router and a Postgres database 🗃️
-- Accessible at [http://2024.ploneconf.org.localhost](http://2024.ploneconf.org.localhost) 🌐
-
-Execute the following:
+These run in CI and must pass before images are built:
 
 ```shell
-make stack-start
-make stack-create-site
+cd frontend && make lint && make ci-i18n && make test
 ```
 
-And... you're all set! Your Plone site is up and running locally! 🚀
+The backend runs black, isort, flake8 and zpretty (via `plone/code-analysis-action`)
+and `pytest tests`.
 
-## Project Structure 🏗️
+## Docker images
 
-This monorepo consists of three distinct sections: `backend`, `frontend`, and `devops`.
+On every push that touches `backend/` or `frontend/`, GitHub Actions runs the
+checks and pushes images to GHCR:
 
-- **backend**: Houses the API and Plone installation, utilizing pip instead of buildout, and includes a policy package named ploneconf.
-- **frontend**: Contains the React (Volto) package.
-- **devops**: Encompasses Docker Stack, Ansible playbooks, and Cache settings.
+- `ghcr.io/tkimnguyen/waverobotics.com-backend`
+- `ghcr.io/tkimnguyen/waverobotics.com-frontend`
 
-### Why This Structure? 🤔
+Tags: `sha-<short commit>` for every build, the branch name, and `latest` for
+`main`. Images are `linux/amd64`.
 
-- All necessary codebases to run the site are contained within the repo (excluding existing addons for Plone and React).
-- Specific GitHub Workflows are triggered based on changes in each codebase (refer to .github/workflows).
-- Simplifies the creation of Docker images for each codebase.
-- Demonstrates Plone installation/setup without buildout.
+The root `docker-compose.yml` and the `stack-*` Makefile targets are the
+upstream local stack (Traefik + Postgres) and are not used for production.
 
-## Code Quality Assurance 🧐
+## Production
 
-To automatically format your code and ensure it adheres to quality standards, execute:
+The server runs the two images with `devops/production/compose.yml`, behind nginx
+on the host, which proxies to `127.0.0.1:3000` (frontend) and `127.0.0.1:8080`
+(backend, `++api++`). The compose file sits in its own directory on the server
+with an `.env` file that pins the image tag:
 
 ```shell
-make format
+TAG=sha-abc1234
 ```
 
-Linters can be run individually within the `backend` or `frontend` folders.
+The backend container runs as the host user that owns the instance data. It mounts
+the existing instance `var` directory as `/data` (database in `filestorage/`,
+blobs in `blobs/`), so the data stays where it was before the move to containers.
+Container logs go to Docker (`docker compose logs`), capped at 5 × 10 MB per
+container.
 
-## Internationalization 🌐
+### Deploying a new build
 
-Generate translation files for Plone and Volto with ease:
+1. Wait for the GitHub Actions run to pass and note the `sha-...` tag.
+2. On the server, in the compose directory: set `TAG` in `.env`, then
 
-```shell
-make i18n
-```
+   ```shell
+   docker compose pull
+   docker compose up -d
+   ```
 
-## Credits and Acknowledgements 🙏
+3. Check the site. If something is wrong, set the previous tag and run the same
+   two commands.
 
-Crafted with care by **This was generated by [cookiecutter-plone-starter](https://github.com/collective/cookiecutter-plone-starter) on 2023-11-28 23:02:47**. A special thanks to all contributors and supporters!
+### Upgrading Plone
+
+A new Plone version usually needs a database migration, and the old version
+cannot run on the migrated database. Plan a short maintenance window:
+
+1. Pull the new images first (`docker compose pull`), with the site still up.
+2. Try the migration on a copy of the data, using a separate compose project and
+   port, with `devops/production/upgrade_site.py` (it runs
+   `portal_migration.upgrade()` for each site; usage is in the file):
+
+   ```shell
+   DATA_DIR=/path/to/copy BACKEND_PORT=8090 docker compose -p trial run --rm --no-deps \
+       -v "$PWD/upgrade_site.py:/scripts/upgrade_site.py:ro" \
+       backend run /scripts/upgrade_site.py </dev/null
+   ```
+
+3. In the window: `docker compose stop`, back up `filestorage/` and `blobs/`, run
+   the same command on the real data (without `DATA_DIR`, `BACKEND_PORT` and
+   `-p trial`), then `docker compose up -d`.
+4. Rollback after a migration means restoring that backup and the previous tag.
+   Changes made on the site after the migration are lost.
+
+When scripting `docker compose run` over ssh, redirect stdin (`</dev/null`):
+otherwise it consumes the rest of the script.
+
+## Credits
+
+Based on the [2024 Plone Conference site](https://github.com/plone/2024.ploneconf.org)
+by the Plone Foundation and contributors, generated with
+[cookiecutter-plone-starter](https://github.com/collective/cookiecutter-plone-starter).
