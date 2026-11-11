@@ -159,3 +159,32 @@ body header.header-wrapper .header nav.navigation .conf-item .item {
   padding: 0;
   list-style: none;
 }
+
+// Phone header: less space above the logo than volto-light-theme 8's 35px,
+// and room for the full 100px logo (the theme caps the logo box at 80px).
+@media only screen and (max-width: $largest-mobile-screen) {
+  body .header-wrapper .header .logo-nav-wrapper {
+    padding-top: 15px;
+
+    .logo {
+      max-height: none;
+    }
+  }
+}
+
+// Mobile menu drawer as before volto-light-theme 8: light blue-grey, and
+// starting just below the header instead of overlapping the logo.
+@media only screen and (max-width: $computer-breakpoint) {
+  body .header-wrapper .header .logo-nav-wrapper .mobile-nav .menu-drawer {
+    background-color: #f4f7f8;
+  }
+
+  body:not(.has-toolbar):not(.has-toolbar-collapsed)
+    .header-wrapper
+    .header
+    .logo-nav-wrapper
+    .mobile-nav
+    .menu-drawer {
+    top: 143px;
+  }
+}
