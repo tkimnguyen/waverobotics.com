@@ -44,9 +44,12 @@
         }
       }
 
+      // Text on the open drop-down. volto-light-theme 8 shows it on a light
+      // grey background (--fatmenu-background), so use the theme's dark
+      // foreground instead of the white used on the old blue background.
       .submenu-inner {
         h2 {
-          color: var(--reverse-color);
+          color: var(--fatmenu-foreground);
         }
 
         .submenu-header {
@@ -58,16 +61,16 @@
 
         li {
           &.subitem-wrapper {
-            border-left: 1px solid var(--reverse-color);
+            border-left: 1px solid var(--fatmenu-foreground);
           }
           > a {
-            color: var(--reverse-color);
+            color: var(--fatmenu-foreground);
 
             span {
               &:hover {
-                border-bottom: 1px solid var(--reverse-color);
+                border-bottom: 1px solid var(--fatmenu-foreground);
               }
-              color: var(--reverse-color);
+              color: var(--fatmenu-foreground);
             }
           }
         }
