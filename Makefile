@@ -68,12 +68,8 @@ backend-build:  ## Build Backend
 	$(MAKE) -C "./backend/" install
 
 .PHONY: backend-create-site
-backend-create-site: ## Create a Plone site with default content
+backend-create-site: ## Create a new, empty Plone site
 	$(MAKE) -C "./backend/" create-site
-
-.PHONY: backend-update-example-content
-backend-update-example-content: ## Export example content inside package
-	$(MAKE) -C "./backend/" update-example-content
 
 .PHONY: backend-start
 backend-start: ## Start Plone Backend

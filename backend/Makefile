@@ -36,7 +36,6 @@ endif
 PLONE_SITE_ID=Plone
 BACKEND_FOLDER=$(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 PLONE_VERSION=$(shell cat $(BACKEND_FOLDER)/version.txt)
-EXAMPLE_CONTENT_FOLDER=${BACKEND_FOLDER}/src/ploneconf/site/setuphandlers/examplecontent
 
 GIT_FOLDER=$(BACKEND_FOLDER)/.git
 VENV_FOLDER=$(BACKEND_FOLDER)/.venv
@@ -90,15 +89,8 @@ console: instance/etc/zope.ini ## Start a console into a Plone instance
 	PYTHONWARNINGS=ignore $(BIN_FOLDER)/zconsole debug instance/etc/zope.conf
 
 .PHONY: create-site
-create-site: instance/etc/zope.ini ## Create a new site from scratch
+create-site: instance/etc/zope.ini ## Create a new, empty Plone site
 	PYTHONWARNINGS=ignore $(BIN_FOLDER)/zconsole run instance/etc/zope.conf ./scripts/create_site.py
-
-# Example Content
-.PHONY: update-example-content
-update-example-content: $(BIN_FOLDER)/tox ## Export example content inside package
-	@echo "$(GREEN)==> Export example content into $(EXAMPLE_CONTENT_FOLDER) $(RESET)"
-	if [ -d $(EXAMPLE_CONTENT_FOLDER)/content ]; then rm -r $(EXAMPLE_CONTENT_FOLDER)/* ;fi
-	$(BIN_FOLDER)/plone-exporter instance/etc/zope.conf $(PLONE_SITE_ID) $(EXAMPLE_CONTENT_FOLDER)
 
 .PHONY: check
 check: $(BIN_FOLDER)/tox ## Check and fix code base according to Plone standards
