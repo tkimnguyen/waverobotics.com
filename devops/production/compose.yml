@@ -1,0 +1,63 @@
+# waverobotics.com production stack.
+#
+# Images are built by GitHub Actions and pulled from GHCR; nothing is built on
+# the server. nginx on the host stays in front and proxies to 127.0.0.1:3000
+# (frontend) and 127.0.0.1:8080 (backend, ++api++ only).
+#
+# Usage, from this directory on the server:
+#   TAG=sha-abc1234 docker compose pull
+#   TAG=sha-abc1234 docker compose up -d
+# TAG defaults to "latest" (the newest build of main).
+#
+# DATA_DIR is the existing Plone instance data (filestorage/, blobs/, cache/).
+
+name: waverobotics
+
+# The server's timezone. The frontend must match the visitors' browsers closely
+# enough that server-rendered dates equal client-rendered ones (otherwise React
+# reports hydration errors), and the backend has always run in it.
+x-tz: &tz America/Chicago
+
+x-logging: &logging
+  driver: json-file
+  options:
+    max-size: "10m"
+    max-file: "5"
+
+services:
+  backend:
+    image: ghcr.io/tkimnguyen/waverobotics.com-backend:${TAG:-latest}
+    restart: unless-stopped
+    # Run as the host's plone user (1000). Running as root would make the
+    # image's entrypoint chown everything under /data to its own uid 500.
+    user: "1000:1000"
+    environment:
+      TZ: *tz
+      # Same limits as the pre-container zope.conf.
+      ZOPE_FORM_MEMORY_LIMIT: 1MB
+      ZOPE_FORM_DISK_LIMIT: 1GB
+      ZOPE_FORM_MEMFILE_LIMIT: 4KB
+      ZODB_CACHE_SIZE: "30000"
+      # Fixed path, so a recreated container does not add a new directory.
+      CLIENT_HOME: /data/clienthome
+    volumes:
+      # The instance var directory (filestorage/, cache/, ...) is /data; the
+      # image expects blobs in /data/blobstorage, the instance has them in blobs/.
+      - ${DATA_DIR:-/home/plone/2024.ploneconf.org/backend/instance/var}:/data
+      - ${DATA_DIR:-/home/plone/2024.ploneconf.org/backend/instance/var}/blobs:/data/blobstorage
+    # Loopback only; nginx on the host proxies to it.
+    ports:
+      - "127.0.0.1:${BACKEND_PORT:-8080}:8080"
+    logging: *logging
+
+  frontend:
+    image: ghcr.io/tkimnguyen/waverobotics.com-frontend:${TAG:-latest}
+    restart: unless-stopped
+    environment:
+      TZ: *tz
+      RAZZLE_INTERNAL_API_PATH: http://backend:8080/Plone
+    depends_on:
+      - backend
+    ports:
+      - "127.0.0.1:${FRONTEND_PORT:-3000}:3000"
+    logging: *logging

@@ -3,26 +3,12 @@
  * @module components/Logo/LogoPythonCerrado
  */
 
-import { defineMessages, useIntl } from 'react-intl';
-import { Image } from 'semantic-ui-react';
-import PythonCerradoLogo from './logo-pythoncerrado.png';
-
-const messages = defineMessages({
-  pythoncerrado: {
-    id: 'Python Cerrado',
-    defaultMessage: 'Python Cerrado',
-  },
-});
-
 /**
- * LogoPythonCerrado component class.
+ * LogoPythonCerrado component class. Renders nothing; kept because Logo and
+ * LanguageSelector still import it.
  * @function LogoPythonCerrado
- * @param {Object} intl Intl object
- * @returns {string} Markup of the component.
+ * @returns {null} Nothing.
  */
-const LogoPythonCerrado = ({ className }) => {
-  const intl = useIntl();
-  return null;
-};
+const LogoPythonCerrado = () => null;
 
 export default LogoPythonCerrado;

@@ -64,11 +64,6 @@ msgstr ""
 msgid "Plone Conference"
 msgstr ""
 
-#. Default: "Python Cerrado"
-#: components/Logo/LogoPythonCerrado
-msgid "Python Cerrado"
-msgstr ""
-
 #. Default: "Read more"
 #: components/Blocks/Teaser/TeaserFeatured
 msgid "Read more"
