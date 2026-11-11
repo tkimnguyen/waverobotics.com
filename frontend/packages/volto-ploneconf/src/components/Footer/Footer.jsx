@@ -2,30 +2,10 @@
 import React from 'react';
 
 import { FormattedMessage, injectIntl } from 'react-intl';
-import { useSelector, shallowEqual } from 'react-redux';
 import { UniversalLink } from '@plone/volto/components';
 import { Container } from '@plone/components';
 import { flattenToAppURL } from '@plone/volto/helpers';
 import FooterLinks from '@plonegovbr/volto-network-block/components/FooterLinks/FooterLinks';
-
-const allSiteActions = {
-  en: [
-    { id: 'contact', title: 'Contact', url: '/en/about/contact' },
-    {
-      id: 'code-of-conduct',
-      title: 'Code of Conduct',
-      url: '/en/about/code-of-conduct',
-    },
-  ],
-  'pt-BR': [
-    { id: 'contact', title: 'Fale Conosco', url: '/pt-br/sobre/contato' },
-    {
-      id: 'code-of-conduct',
-      title: 'Código de Conduta',
-      url: '/pt-br/sobre/codigo-de-conduta',
-    },
-  ],
-};
 
 /**
  * Component to display the footer.
@@ -34,12 +14,6 @@ const allSiteActions = {
  * @returns {string} Markup of the component
  */
 const Footer = ({ intl }) => {
-  const { lang = [] } = useSelector(
-    (state) => ({
-      lang: state.intl.locale,
-    }),
-    shallowEqual,
-  );
   const siteActions = [];
   return (
     <footer id="footer">

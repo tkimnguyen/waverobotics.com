@@ -69,11 +69,6 @@ msgstr "Por favor escolha um conteúdo existente como fonte para esse elemento"
 msgid "Plone Conference"
 msgstr "Plone Conference"
 
-#. Default: "Python Cerrado"
-#: components/Logo/LogoPythonCerrado
-msgid "Python Cerrado"
-msgstr "Python Cerrado"
-
 #. Default: "Read more"
 #: components/Blocks/Teaser/TeaserFeatured
 msgid "Read more"
