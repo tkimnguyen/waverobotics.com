@@ -184,3 +184,11 @@
     }
   }
 }
+
+// Photo-only slides (no title, description or button): show the photo as is,
+// without the dark panel that is only there to make the text readable.
+.block.slider.full-width
+  .teaser-item
+  .highlight-image-wrapper.gradient.has--no-text::after {
+  display: none;
+}

@@ -2,6 +2,8 @@
 
 ## 2026-11-11
 
+- Photo-only slides are shown without the dark panel meant for slide text
+  (it made the FLL slider photos dark blue on phones). (#12)
 - Photo-only slides: the photo's description is read out by screen readers;
   slides without one are skipped instead of announced as unnamed links. (#11)
 - Accessibility fixes from an axe check (WCAG 2.2 A/AA): alternative text for
