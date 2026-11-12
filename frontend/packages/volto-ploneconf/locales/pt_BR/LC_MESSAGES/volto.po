@@ -91,6 +91,16 @@ msgstr "Plone Conference"
 msgid "Read more"
 msgstr "Saiba mais"
 
+#. Default: "Search"
+#: components/MobileNavigation/MobileNavigation
+msgid "Search"
+msgstr ""
+
+#. Default: "Search Site"
+#: components/MobileNavigation/MobileNavigation
+msgid "Search Site"
+msgstr ""
+
 #. Default: "Source"
 #: components/Blocks/Slider/SliderFull
 msgid "Source"

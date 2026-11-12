@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Plone\n"
-"POT-Creation-Date: 2026-11-11T07:06:18.204Z\n"
+"POT-Creation-Date: 2026-11-12T17:44:26.756Z\n"
 "Last-Translator: Plone i18n <plone-i18n@lists.sourceforge.net>\n"
 "Language-Team: Plone i18n <plone-i18n@lists.sourceforge.net>\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -86,6 +86,16 @@ msgstr ""
 #. Default: "Read more"
 #: components/Blocks/Teaser/TeaserFeatured
 msgid "Read more"
+msgstr ""
+
+#. Default: "Search"
+#: components/MobileNavigation/MobileNavigation
+msgid "Search"
+msgstr ""
+
+#. Default: "Search Site"
+#: components/MobileNavigation/MobileNavigation
+msgid "Search Site"
 msgstr ""
 
 #. Default: "Source"

@@ -86,6 +86,16 @@ msgstr ""
 msgid "Read more"
 msgstr ""
 
+#. Default: "Search"
+#: components/MobileNavigation/MobileNavigation
+msgid "Search"
+msgstr ""
+
+#. Default: "Search Site"
+#: components/MobileNavigation/MobileNavigation
+msgid "Search Site"
+msgstr ""
+
 #. Default: "Source"
 #: components/Blocks/Slider/SliderFull
 msgid "Source"
