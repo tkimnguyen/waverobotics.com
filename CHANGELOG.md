@@ -2,6 +2,9 @@
 
 ## 2026-11-11
 
+- Saving a page from an edit page opened directly (reload or bookmark) no
+  longer stores the backend's internal address in slide and teaser links,
+  which made the FLL Explore slider photos disappear. (#13)
 - Photo-only slides are shown without the dark panel meant for slide text
   (it made the FLL slider photos dark blue on phones). (#12)
 - Photo-only slides: the photo's description is read out by screen readers;

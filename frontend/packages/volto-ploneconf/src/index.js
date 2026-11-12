@@ -37,6 +37,9 @@ import listBulletSVG from '@plone/volto/icons/list-bullet.svg';
 // Reducers
 import reducers from './reducers';
 
+// Store
+import flattenInternalUrls from './middleware/flattenInternalUrls';
+
 const BG_COLORS = [
   { name: 'transparent', label: 'Transparent' },
   { name: 'grey', label: 'Grey' },
@@ -221,6 +224,12 @@ const applyConfig = (config) => {
       '__button',
     ],
   };
+  // Keep internal backend addresses out of blocks rendered on the server.
+  config.settings.storeExtenders = [
+    ...(config.settings.storeExtenders || []),
+    (stack) => [...stack, flattenInternalUrls],
+  ];
+
   return config;
 };
 
