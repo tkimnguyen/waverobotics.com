@@ -98,20 +98,6 @@
   }
 }
 
-.header-wrapper .header .logo-nav-wrapper .site-selector {
-  flex: 1 1 0;
-  align-self: center;
-  @media only screen and (max-width: $largest-mobile-screen) {
-    display: none;
-  }
-}
-
-.header-wrapper .header .logo-nav-wrapper .mobile-nav .site-selector {
-  @media only screen and (max-width: $largest-mobile-screen) {
-    display: block;
-  }
-}
-
 .header-wrapper .header .logo-nav-wrapper .mobile-nav {
   @media only screen and (max-width: $largest-mobile-screen) {
     align-self: center;
@@ -154,13 +140,6 @@ body header.header-wrapper .header nav.navigation .conf-item .item {
   &:hover {
     color: var(--main-color);
   }
-}
-
-// The mobile menu's language list lost its list-style reset in
-// volto-light-theme 8 and showed a stray bullet.
-.mobile-tools {
-  padding: 0;
-  list-style: none;
 }
 
 // Phone header: less space above the logo than volto-light-theme 8's 35px,
@@ -306,12 +285,4 @@ body
   flex: 0 0 auto;
   align-self: center;
   margin-left: auto;
-}
-
-// The (empty) language selector took a flexible share of the header and
-// squeezed the menu so its words broke at narrower desktop widths.
-@media only screen and (min-width: $computer-breakpoint) {
-  body .header-wrapper .header .logo-nav-wrapper > .site-selector {
-    flex: 0 0 auto;
-  }
 }

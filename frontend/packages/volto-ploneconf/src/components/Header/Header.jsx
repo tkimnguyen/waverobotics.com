@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Container } from '@plone/components';
 import MobileNavigation from '../MobileNavigation/MobileNavigation';
 import Logo from '../Logo/Logo';
-import LanguageSelector from './LanguageSelector';
 import Navigation from '../Navigation/Navigation';
 import SearchWidget from '@kitconcept/volto-light-theme/components/SearchWidget/SearchWidget';
 
@@ -20,7 +19,6 @@ const Header = (props) => {
             </div>
             <Navigation pathname={pathname} />
             <MobileNavigation pathname={pathname} />
-            <LanguageSelector />
             <div className="search-wrapper navigation-desktop">
               <div className="search">
                 <SearchWidget />

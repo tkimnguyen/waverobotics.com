@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Plone\n"
-"POT-Creation-Date: 2026-11-12T17:44:26.756Z\n"
+"POT-Creation-Date: 2026-11-12T18:33:55.356Z\n"
 "Last-Translator: Plone i18n <plone-i18n@lists.sourceforge.net>\n"
 "Language-Team: Plone i18n <plone-i18n@lists.sourceforge.net>\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -122,11 +122,6 @@ msgstr ""
 #. Default: "Sponsorship Form"
 #: components/Blocks/SponsorLevel/schema
 msgid "Sponsorship Form"
-msgstr ""
-
-#. Default: "Switch to"
-#: components/Header/LanguageSelector
-msgid "Switch to"
 msgstr ""
 
 #. Default: "This site is built using Python and Plone"

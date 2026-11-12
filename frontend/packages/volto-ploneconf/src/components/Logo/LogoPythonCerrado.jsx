@@ -4,8 +4,8 @@
  */
 
 /**
- * LogoPythonCerrado component class. Renders nothing; kept because Logo and
- * LanguageSelector still import it.
+ * LogoPythonCerrado component class. Renders nothing; kept because Logo still
+ * imports it.
  * @function LogoPythonCerrado
  * @returns {null} Nothing.
  */

@@ -2,6 +2,9 @@
 
 ## 2026-11-12
 
+- Removed the language selector from the header and phone menu: it held an
+  invisible, empty link to the Portuguese section (which no longer exists)
+  that screen readers announced. (#16)
 - TODO.md lists open work (features, content fixes, code follow-ups). (#15)
 - Site search: a magnifying-glass button at the right of the desktop header
   opens a search field (as on demo.plone.org), and the phone menu has a search

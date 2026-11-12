@@ -122,11 +122,6 @@ msgstr ""
 msgid "Sponsorship Form"
 msgstr ""
 
-#. Default: "Switch to"
-#: components/Header/LanguageSelector
-msgid "Switch to"
-msgstr ""
-
 #. Default: "This site is built using Python and Plone"
 #: components/Footer/Footer
 msgid "This site is built using Python and Plone."
