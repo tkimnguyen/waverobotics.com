@@ -2,6 +2,7 @@
 
 ## 2026-11-12
 
+- TODO.md lists open work (features, content fixes, code follow-ups). (#15)
 - Site search: a magnifying-glass button at the right of the desktop header
   opens a search field (as on demo.plone.org), and the phone menu has a search
   field at the top. The desktop menu no longer breaks words between about 990

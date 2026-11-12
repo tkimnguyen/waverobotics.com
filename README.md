@@ -6,6 +6,9 @@ Plone 6.2.3 backend + Volto 19.7.0 frontend. The project started from
 [plone/2024.ploneconf.org](https://github.com/plone/2024.ploneconf.org) and keeps
 its layout and some of its tooling.
 
+Open work is listed in [TODO.md](TODO.md); changes are in
+[CHANGELOG.md](CHANGELOG.md).
+
 ## Repository layout
 
 - `backend/`: Plone, installed with pip and mxdev (no buildout). Policy package
