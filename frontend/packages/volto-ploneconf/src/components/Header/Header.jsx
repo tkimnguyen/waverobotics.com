@@ -5,6 +5,7 @@ import MobileNavigation from '../MobileNavigation/MobileNavigation';
 import Logo from '../Logo/Logo';
 import LanguageSelector from './LanguageSelector';
 import Navigation from '../Navigation/Navigation';
+import SearchWidget from '@kitconcept/volto-light-theme/components/SearchWidget/SearchWidget';
 
 const Header = (props) => {
   const { pathname } = props;
@@ -20,6 +21,11 @@ const Header = (props) => {
             <Navigation pathname={pathname} />
             <MobileNavigation pathname={pathname} />
             <LanguageSelector />
+            <div className="search-wrapper navigation-desktop">
+              <div className="search">
+                <SearchWidget />
+              </div>
+            </div>
           </div>
         </div>
       </Container>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { defineMessages, useIntl } from 'react-intl';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import cx from 'classnames';
 
 import { CSSTransition } from 'react-transition-group';
@@ -12,6 +12,7 @@ import LanguageSelector from '../Header/LanguageSelector';
 import { Icon } from '@plone/volto/components';
 import arrowRightSVG from '@plone/volto/icons/right-key.svg';
 import arrowLeftSVG from '@plone/volto/icons/left-key.svg';
+import zoomSVG from '@plone/volto/icons/zoom.svg';
 
 const messages = defineMessages({
   closeMobileMenu: {
@@ -21,6 +22,14 @@ const messages = defineMessages({
   openMobileMenu: {
     id: 'Open menu',
     defaultMessage: 'Open menu',
+  },
+  search: {
+    id: 'Search',
+    defaultMessage: 'Search',
+  },
+  searchSite: {
+    id: 'Search Site',
+    defaultMessage: 'Search Site',
   },
 });
 
@@ -32,7 +41,9 @@ const MobileNavigation = (props) => {
   const [tertiaryMenuOpened, setTertiaryMenuOpened] = React.useState(null);
   const [isTertiaryMobileMenuOpen, setIsTertiaryMobileMenuOpen] =
     React.useState(false);
+  const [searchText, setSearchText] = React.useState('');
   const intl = useIntl();
+  const history = useHistory();
   const menus = React.useRef(null);
   const currentLang = useSelector((state) => state.intl.locale);
   const items = useSelector((state) => state.navigation.items || []);
@@ -98,6 +109,15 @@ const MobileNavigation = (props) => {
     body.style = '';
   }
 
+  function onSearch(e) {
+    e.preventDefault();
+    const text = searchText.trim();
+    if (!text) return;
+    closeMenus(e);
+    setSearchText('');
+    history.push(`/search?SearchableText=${encodeURIComponent(text)}`);
+  }
+
   return (
     <div className="mobile-nav mobile only tablet only" ref={menus}>
       <div className="hamburger-wrapper">
@@ -132,6 +152,24 @@ const MobileNavigation = (props) => {
       >
         <div className="menu-drawer">
           <BodyClass className="has-menu-open" />
+          <form className="mobile-search" role="search" onSubmit={onSearch}>
+            <input
+              type="search"
+              name="SearchableText"
+              value={searchText}
+              onChange={(e) => setSearchText(e.target.value)}
+              placeholder={intl.formatMessage(messages.searchSite)}
+              aria-label={intl.formatMessage(messages.searchSite)}
+              autoComplete="off"
+            />
+            <button
+              type="submit"
+              aria-label={intl.formatMessage(messages.search)}
+              title={intl.formatMessage(messages.search)}
+            >
+              <Icon name={zoomSVG} size="36px" />
+            </button>
+          </form>
           <ul className="sections">
             <li className="header">
               <Link to={`/${toBackendLang(currentLang)}`} onClick={closeMenus}>

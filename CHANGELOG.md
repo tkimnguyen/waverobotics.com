@@ -1,5 +1,12 @@
 # Changes
 
+## 2026-11-12
+
+- Site search: a magnifying-glass button at the right of the desktop header
+  opens a search field (as on demo.plone.org), and the phone menu has a search
+  field at the top. The desktop menu no longer breaks words between about 990
+  and 1150 px wide (an empty language-selector box was taking its room). (#14)
+
 ## 2026-11-11
 
 - Saving a page from an edit page opened directly (reload or bookmark) no
