@@ -244,3 +244,74 @@ body
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
 }
+
+// Phone menu: search field above the menu entries (desktop uses the theme's
+// search button in the header).
+.mobile-nav .menu-drawer .mobile-search {
+  display: flex;
+  align-items: center;
+  border: 1px solid #767676;
+  margin: 20px 30px 0;
+  background: #fff;
+
+  input {
+    min-width: 0;
+    flex: 1 1 auto;
+    padding: 0 12px;
+    border: 0;
+    margin: 0;
+    background: transparent;
+    color: #000;
+    font: inherit;
+    font-size: 18px;
+    line-height: 46px;
+
+    &::placeholder {
+      color: #595959;
+      opacity: 1;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &:focus-within {
+    outline: 2px solid #000;
+    outline-offset: 2px;
+  }
+
+  button {
+    display: flex;
+    width: 46px;
+    height: 46px;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: #000;
+    cursor: pointer;
+  }
+}
+
+// Desktop search button: take only its own width at the right end of the
+// header, so the menu keeps its room (the theme lets the search box grow).
+body
+  .header-wrapper
+  .header
+  .logo-nav-wrapper
+  .search-wrapper.navigation-desktop {
+  flex: 0 0 auto;
+  align-self: center;
+  margin-left: auto;
+}
+
+// The (empty) language selector took a flexible share of the header and
+// squeezed the menu so its words broke at narrower desktop widths.
+@media only screen and (min-width: $computer-breakpoint) {
+  body .header-wrapper .header .logo-nav-wrapper > .site-selector {
+    flex: 0 0 auto;
+  }
+}
