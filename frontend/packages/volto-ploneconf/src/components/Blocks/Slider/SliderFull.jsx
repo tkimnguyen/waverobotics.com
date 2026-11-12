@@ -130,6 +130,9 @@ const SliderBodyFull = ({
                 className={cx(
                   'highlight-image-wrapper gradient',
                   `has--slider--flagAlign--${data.flagAlign}`,
+                  // No dark panel over photo-only slides (it is there for
+                  // the text's contrast).
+                  { 'has--no-text': !slideText && !showsButton },
                 )}
               >
                 <Image
