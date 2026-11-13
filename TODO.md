@@ -26,10 +26,6 @@ content edits, not code:
 
 ## Code
 
-- **Empty language link in the header:** the header still holds an invisible,
-  empty "Switch to português (brasil)" link left over from the conference
-  template. Screen readers announce it. Decide whether to remove it (and
-  whether the `pt-br` part of the site is still needed).
 - **Volto bug [plone/volto#8528](https://github.com/plone/volto/issues/8528):**
   saving an edit page that was opened directly stored internal backend
   addresses in blocks. Worked around in

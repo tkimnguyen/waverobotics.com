@@ -127,11 +127,6 @@ msgstr "Patrocinadores"
 msgid "Sponsorship Form"
 msgstr "Formulário de patrocínio"
 
-#. Default: "Switch to"
-#: components/Header/LanguageSelector
-msgid "Switch to"
-msgstr "Visitar"
-
 #. Default: "This site is built using Python and Plone"
 #: components/Footer/Footer
 msgid "This site is built using Python and Plone."

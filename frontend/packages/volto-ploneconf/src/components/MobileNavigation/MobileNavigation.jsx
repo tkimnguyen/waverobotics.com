@@ -8,7 +8,6 @@ import { CSSTransition } from 'react-transition-group';
 import { FormattedMessage } from 'react-intl';
 
 import { BodyClass, toBackendLang } from '@plone/volto/helpers';
-import LanguageSelector from '../Header/LanguageSelector';
 import { Icon } from '@plone/volto/components';
 import arrowRightSVG from '@plone/volto/icons/right-key.svg';
 import arrowLeftSVG from '@plone/volto/icons/left-key.svg';
@@ -47,14 +46,6 @@ const MobileNavigation = (props) => {
   const menus = React.useRef(null);
   const currentLang = useSelector((state) => state.intl.locale);
   const items = useSelector((state) => state.navigation.items || []);
-
-  const Footer = () => (
-    <ul className="mobile-tools">
-      <li>
-        <LanguageSelector fullLabel={true} />
-      </li>
-    </ul>
-  );
 
   function toggleMobileMenu() {
     const body = document.getElementsByTagName('body')[0];
@@ -328,19 +319,16 @@ const MobileNavigation = (props) => {
                                         ),
                                       )}
                                   </ul>
-                                  <Footer />
                                 </div>
                               </CSSTransition>
                             </li>
                           ))}
                       </ul>
-                      <Footer />
                     </div>
                   </CSSTransition>
                 </li>
               ))}
           </ul>
-          <Footer />
         </div>
       </CSSTransition>
     </div>
