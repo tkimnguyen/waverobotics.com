@@ -1,0 +1,17 @@
+// Volto's search results page (/search). The theme gives page content a
+// side gutter on narrow screens, but not this page, so on phones the text ran
+// to the screen edge. Use the same rule as the theme's blocks.
+#page-search #content {
+  @include adjustMarginsToContainer($default-container-width);
+}
+
+// The "N results / Sort by: Relevance | Alphabetically | Date" row is a single
+// line in Volto and was wider than a phone screen; let it wrap.
+#page-search .items_total {
+  flex-wrap: wrap;
+  row-gap: 8px;
+
+  .header-content {
+    flex-wrap: wrap;
+  }
+}
