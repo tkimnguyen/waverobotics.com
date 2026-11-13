@@ -2,6 +2,8 @@
 
 ## 2026-11-12
 
+- Search results page on phones: the same side margins as other pages, and the
+  sort row wraps instead of making the page scroll sideways. (#17)
 - Removed the language selector from the header and phone menu: it held an
   invisible, empty link to the Portuguese section (which no longer exists)
   that screen readers announced. (#16)
