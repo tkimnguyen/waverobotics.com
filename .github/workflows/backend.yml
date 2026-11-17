@@ -17,7 +17,7 @@ jobs:
       PLONE_VERSION: ${{ steps.vars.outputs.PLONE_VERSION }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Set Env Vars
         id: vars
@@ -30,7 +30,7 @@ jobs:
       - config
     steps:
       - name: Checkout codebase
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Run check
         uses: plone/code-analysis-action@v2
@@ -44,7 +44,7 @@ jobs:
       - config
     steps:
       - name: Checkout codebase
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Run check
         uses: plone/code-analysis-action@v2
@@ -58,7 +58,7 @@ jobs:
       - config
     steps:
       - name: Checkout codebase
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Run check
         uses: plone/code-analysis-action@v2
@@ -72,7 +72,7 @@ jobs:
       - config
     steps:
       - name: Checkout codebase
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Run check
         uses: plone/code-analysis-action@v2
@@ -89,13 +89,22 @@ jobs:
         working-directory: ./backend
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - name: Setup Plone ${{ needs.config.outputs.PLONE_VERSION }} with Python ${{ env.PYTHON_VERSION }}
-        uses: plone/setup-plone@v2.0.0
+      # What plone/setup-plone did, without its setup-python@v4/v5 (Node 20).
+      - name: Set up Python ${{ env.PYTHON_VERSION }}
+        uses: actions/setup-python@v7
         with:
           python-version: ${{ env.PYTHON_VERSION }}
-          plone-version: ${{ needs.config.outputs.PLONE_VERSION }}
+          cache: pip
+          cache-dependency-path: backend/constraints.txt
+
+      - name: Install Plone ${{ needs.config.outputs.PLONE_VERSION }}
+        env:
+          CONSTRAINTS: https://dist.plone.org/release/${{ needs.config.outputs.PLONE_VERSION }}/constraints.txt
+        run: |
+          pip install -U pip wheel setuptools -c "$CONSTRAINTS"
+          pip install Plone plone.app.testing -c "$CONSTRAINTS"
 
       - name: Install package
         run: |
@@ -122,11 +131,11 @@ jobs:
     steps:
 
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Docker meta
         id: meta
-        uses: docker/metadata-action@v5
+        uses: docker/metadata-action@v6
         with:
           images: |
             ${{ env.IMAGE_NAME_PREFIX }}-${{ env.IMAGE_NAME_SUFFIX }}
@@ -140,17 +149,17 @@ jobs:
             type=raw,value=latest,enable={{is_default_branch}}
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@v4
 
       - name: Login to Container Registry
-        uses: docker/login-action@v3
+        uses: docker/login-action@v4
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and push
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v7
         with:
           platforms: linux/amd64
           context: backend
