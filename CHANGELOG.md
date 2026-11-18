@@ -1,5 +1,15 @@
 # Changes
 
+## 2026-11-17
+
+- Smaller downloads on every first visit: the header logo is a 534x300 copy
+  (34 KB instead of the 2853x1603, 275 KB original), and the text font is the
+  theme's Inter as woff2 files with Latin characters, arrows and shapes (about
+  50 KB per weight instead of about 160 KB for the theme's .ttf files).
+  Characters Inter doesn't have, such as emoji, come from the system font
+  without first downloading a full .ttf. `devops/perf/loadtime.js` measures
+  page load times. (#19)
+
 ## 2026-11-12
 
 - Search results page on phones: the same side margins as other pages, and the

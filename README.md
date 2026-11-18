@@ -25,6 +25,7 @@ Open work is listed in [TODO.md](TODO.md); changes are in
   dependencies are locked in `frontend/pnpm-lock.yaml`.
 - `devops/production/compose.yml`: the production stack.
 - `devops/production/backup/`: the nightly content backup (script and systemd units).
+- `devops/perf/loadtime.js`: measures full page loads in a headless browser.
 - `.github/workflows/`: checks and Docker image builds.
 
 ## Local development
@@ -180,6 +181,23 @@ systemctl enable --now plone-backup.timer
 
 Check: `cat /home/plone/backups/last-success`, `journalctl -u plone-backup`.
 Restoring is described at the top of the script.
+
+### Page load times
+
+`devops/perf/loadtime.js` loads pages in headless Chromium (Playwright), at
+desktop size and as an iPhone 13, first with an empty cache and then as a
+reload, and prints the median of several runs as a table: time to first byte,
+first contentful paint, largest contentful paint, DOMContentLoaded, the load
+event, the end of the last download (all in ms), the request count and the KB
+transferred. It works for any site.
+
+```shell
+npm install playwright && npx playwright install chromium
+node devops/perf/loadtime.js [--runs N] [--throttle] URL...
+```
+
+`--throttle` simulates a slow 4G connection (1.6 Mbit/s, 150 ms latency) and
+a 4x slower CPU, like Lighthouse's mobile setting.
 
 ## Credits
 
