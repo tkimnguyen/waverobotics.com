@@ -1,0 +1,95 @@
+// The site's text font: volto-light-theme's Inter, as compressed woff2 files
+// with only Latin characters, arrows and shapes (about 50 KB per weight; the
+// theme's .ttf files are about 160 KB each, compressed).
+//
+// The fonts get their own family name and the theme's --custom-main-font points
+// at it. With the theme's own "Inter" family in the stack, any character
+// these files don't have (an emoji, for example) would make the browser
+// download the theme's full .ttf just to look for it. Characters the files
+// don't have now come straight from the system's sans-serif font.
+//
+// Made from the theme's Inter-*.ttf (SIL Open Font License) with fonttools:
+//   pyftsubset Inter-<Weight>.ttf --layout-features='*' --flavor=woff2 \
+//     --unicodes='U+0000-024F, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0300-036F, U+1E00-1EFF, U+2000-206F, U+20A0-20CF, U+2122, U+2190-21FF, U+2212, U+2215, U+25A0-25FF, U+2C60-2C7F, U+A720-A7FF, U+FEFF, U+FFFD'
+
+@font-face {
+  font-display: swap;
+  font-family: 'Inter WR';
+  font-style: normal;
+  font-weight: 100;
+  src: url('./fonts/Inter-Thin.woff2') format('woff2');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Inter WR';
+  font-style: normal;
+  font-weight: 200;
+  src: url('./fonts/Inter-ExtraLight.woff2') format('woff2');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Inter WR';
+  font-style: normal;
+  font-weight: 300;
+  src: url('./fonts/Inter-Light.woff2') format('woff2');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Inter WR';
+  font-style: normal;
+  font-weight: 400;
+  src: url('./fonts/Inter-Regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Inter WR';
+  font-style: normal;
+  font-weight: 500;
+  src: url('./fonts/Inter-Medium.woff2') format('woff2');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Inter WR';
+  font-style: normal;
+  font-weight: 600;
+  src: url('./fonts/Inter-SemiBold.woff2') format('woff2');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Inter WR';
+  font-style: normal;
+  font-weight: 700;
+  src: url('./fonts/Inter-Bold.woff2') format('woff2');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Inter WR';
+  font-style: normal;
+  font-weight: 800;
+  src: url('./fonts/Inter-ExtraBold.woff2') format('woff2');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Inter WR';
+  font-style: normal;
+  font-weight: 900;
+  src: url('./fonts/Inter-Black.woff2') format('woff2');
+}
+
+:root {
+  --custom-main-font: 'Inter WR', sans-serif;
+}
+
+// The theme's sticky menu names "Inter" directly.
+.sticky-menu ul li,
+.sticky-menu ul li a {
+  font-family: var(--custom-main-font);
+}

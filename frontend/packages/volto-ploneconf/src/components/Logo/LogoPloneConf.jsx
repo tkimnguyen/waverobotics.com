@@ -5,7 +5,8 @@
 
 import { defineMessages, useIntl } from 'react-intl';
 import { Image } from 'semantic-ui-react';
-import PloneConfLogo from './logo-ploneconf.png';
+// 3x the displayed 178x100 size, from waveRoboticsLogo3.jpg (2853x1603, 275 KB).
+import PloneConfLogo from './waveRoboticsLogo-534x300.jpg';
 
 const messages = defineMessages({
   ploneconf: {
