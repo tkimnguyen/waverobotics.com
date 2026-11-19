@@ -139,7 +139,11 @@ const SliderBodyFull = ({
                   item={image || href}
                   imageField={image ? image.image_field : href.image_field}
                   alt={photoAlt}
-                  loading="lazy"
+                  // The first slide is usually the largest thing on the
+                  // page: load it right away, with high priority (Volto's
+                  // Image adds fetchpriority="high" when not lazy). The
+                  // other slides are hidden until the slider moves.
+                  loading={index === 0 ? 'eager' : 'lazy'}
                   responsive={true}
                 />
               </Container>

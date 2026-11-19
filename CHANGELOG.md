@@ -1,5 +1,12 @@
 # Changes
 
+## 2026-11-19
+
+- The first slide of a full-width slider loads right away and with high
+  priority (it was lazy-loaded, which delayed the main photo of the home page),
+  and embedded frames in HTML blocks (calendar, videos, forms) load only when
+  they come near the screen. (#20)
+
 ## 2026-11-17
 
 - Smaller downloads on every first visit: the header logo is a 534x300 copy
