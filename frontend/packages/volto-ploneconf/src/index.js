@@ -19,6 +19,8 @@ import { ColoredCTAEnhancer } from './components/Blocks/Teaser/coloredCTAschema'
 // Slider
 import SliderBody from '@kitconcept/volto-slider-block/components/DefaultBody';
 import SliderBodyFull from './components/Blocks/Slider/SliderFull';
+// HTML block: embedded frames load lazily
+import HTMLView from './components/Blocks/HTML/View';
 
 // Structural components, used through volto-light-theme's component registry
 import Header from './components/Header/Header';
@@ -131,6 +133,10 @@ const applyConfig = (config) => {
   config.blocks.blocksConfig.teaser = {
     ...config.blocks.blocksConfig.teaser,
     variations: teaserVariations,
+  };
+  config.blocks.blocksConfig.html = {
+    ...config.blocks.blocksConfig.html,
+    view: HTMLView,
   };
   config.blocks.blocksConfig.slider = {
     ...config.blocks.blocksConfig.slider,
