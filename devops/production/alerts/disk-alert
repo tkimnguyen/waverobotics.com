@@ -1,0 +1,8 @@
+#!/bin/bash
+# Email the admin when a filesystem is over the limit (default 85%).
+LIMIT=${1:-85}
+X="-x tmpfs -x devtmpfs -x squashfs -x overlay -x efivarfs"
+full=$(df -P $X | awk -v l="$LIMIT" 'NR>1 { u=$5; sub("%","",u); if (u+0 > l) print }')
+[ -z "$full" ] && exit 0
+{ echo "Filesystems over ${LIMIT}% on $(hostname):"; echo; echo "$full"; echo; df -h $X; } \
+  | /usr/local/sbin/mail-admin "[$(hostname)] disk over ${LIMIT}%"

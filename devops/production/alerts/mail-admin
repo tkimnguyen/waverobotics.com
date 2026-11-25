@@ -1,0 +1,6 @@
+#!/bin/bash
+# Email the admin: mail-admin "subject" < body
+. /etc/mail-admin.conf
+{ printf 'To: %s\nSubject: %s\nDate: %s\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\n\n' \
+    "$ADMIN_EMAIL" "$1" "$(date -R)"
+  cat; } | /usr/sbin/sendmail -t -oi

@@ -25,6 +25,7 @@ Open work is listed in [TODO.md](TODO.md); changes are in
   dependencies are locked in `frontend/pnpm-lock.yaml`.
 - `devops/production/compose.yml`: the production stack.
 - `devops/production/backup/`: the nightly content backup (script and systemd units).
+- `devops/production/alerts/`: email alerts from the server (failed services, full disk).
 - `devops/perf/loadtime.js`: measures full page loads in a headless browser.
 - `docs/slides/`: slides about the site for the team (Marp).
 - `.github/workflows/`: checks and Docker image builds.
@@ -182,6 +183,48 @@ systemctl enable --now plone-backup.timer
 
 Check: `cat /home/plone/backups/last-success`, `journalctl -u plone-backup`.
 Restoring is described at the top of the script.
+
+Alerts (needs the email setup below): if a backup fails, the drop-in in
+`plone-backup.service.d/` emails the admin its status and last log lines. Every
+day at 09:00, `plone-backup-check.sh` emails the admin if the last successful
+backup is 30 hours old or more, which catches backups that stopped running.
+Install them after the backup units:
+
+```shell
+install -m 755 plone-backup-check.sh /usr/local/sbin/plone-backup-check.sh
+install -m 644 plone-backup-check.service plone-backup-check.timer /etc/systemd/system/
+install -D -m 644 plone-backup.service.d/notify-failure.conf \
+  /etc/systemd/system/plone-backup.service.d/notify-failure.conf
+systemctl daemon-reload
+systemctl enable --now plone-backup-check.timer
+```
+
+### Email alerts
+
+The server sends mail through an outside SMTP account with `msmtp` (package
+`msmtp-mta`, which provides `sendmail`); its settings and password are only on
+the server (`/etc/msmtprc`, readable by root). Mail to `root` goes to the admin
+through `/etc/aliases`. The scripts in `devops/production/alerts/`:
+
+- `mail-admin`: `mail-admin "subject" < body` mails the address in
+  `/etc/mail-admin.conf` (see `mail-admin.conf.example`).
+- `notify-failure` and `notify-failure@.service`: a unit with
+  `OnFailure=notify-failure@%n.service` emails the admin when it fails, with its
+  status and last 40 log lines.
+- `disk-alert` and `disk-alert.cron`: every day at 09:15, mail if a filesystem
+  is over 85% full.
+
+Install, as root, from `devops/production/alerts/`:
+
+```shell
+install -m 755 mail-admin notify-failure disk-alert /usr/local/sbin/
+install -m 644 notify-failure@.service /etc/systemd/system/
+install -m 644 disk-alert.cron /etc/cron.d/disk-alert
+install -m 644 mail-admin.conf.example /etc/mail-admin.conf  # then set the address
+systemctl daemon-reload
+```
+
+Test: `echo test | mail-admin "test from $(hostname)"`.
 
 ### Page load times
 

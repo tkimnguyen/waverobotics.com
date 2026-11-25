@@ -1,0 +1,3 @@
+# Daily disk space check (see /usr/local/sbin/disk-alert)
+MAILTO=root
+15 9 * * * root /usr/local/sbin/disk-alert 85

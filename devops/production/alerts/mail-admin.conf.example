@@ -1,0 +1,3 @@
+# Address for server alerts (used by /usr/local/sbin/mail-admin).
+# Install as /etc/mail-admin.conf with the real address.
+ADMIN_EMAIL=admin@example.org
