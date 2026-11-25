@@ -27,6 +27,7 @@ Open work is listed in [TODO.md](TODO.md); changes are in
 - `devops/production/backup/`: the nightly content backup (script and systemd units).
 - `devops/production/alerts/`: email alerts from the server (failed services, full disk).
 - `devops/perf/loadtime.js`: measures full page loads in a headless browser.
+- `docs/slides/`: slides about the site for the team (Marp).
 - `.github/workflows/`: checks and Docker image builds.
 
 ## Local development
@@ -247,3 +248,19 @@ a 4x slower CPU, like Lighthouse's mobile setting.
 Based on the [2024 Plone Conference site](https://github.com/plone/2024.ploneconf.org)
 by the Plone Foundation and contributors, generated with
 [cookiecutter-plone-starter](https://github.com/collective/cookiecutter-plone-starter).
+
+## Slides
+
+`docs/slides/waverobotics-site.md` is a short deck for the team: what the site
+does for Wave Robotics, how it's built, and what changed in November 2026. It is
+written for [Marp](https://marp.app); `waverobotics-site.html` next to it is the
+rendered deck (open it in a browser; arrow keys move between slides, `f` goes
+full screen). It loads its images from `docs/slides/images/`, so keep the folder
+together. To render it again after editing:
+
+```shell
+cd docs/slides
+npx @marp-team/marp-cli@4.2.3 --no-stdin waverobotics-site.md -o waverobotics-site.html
+```
+
+Add `--pdf` or `--pptx` (and `--allow-local-files`) for other formats.
