@@ -2,6 +2,8 @@
 
 ## 2026-11-25
 
+- The slide deck is on GitHub Pages:
+  https://tkimnguyen.github.io/waverobotics.com/slides/waverobotics-site.html (#23)
 - Email alerts from the production server are in the repo
   (`devops/production/alerts/`): mail when a service fails (with its log) and
   when a disk is over 85% full. The nightly backup emails when it fails, and a
