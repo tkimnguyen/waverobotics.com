@@ -1,0 +1,7 @@
+#!/bin/bash
+# Called by notify-failure@.service with the failed unit's name.
+unit="$1"
+{ echo "$unit failed on $(hostname) at $(date)."; echo
+  systemctl status --no-pager --lines=0 "$unit"; echo
+  echo "Last 40 log lines:"; journalctl -u "$unit" -n 40 --no-pager; } \
+  | /usr/local/sbin/mail-admin "[$(hostname)] $unit failed"

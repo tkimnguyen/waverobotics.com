@@ -1,0 +1,9 @@
+[Unit]
+Description=Check daily that the nightly Plone backup ran recently
+
+[Timer]
+OnCalendar=*-*-* 09:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target

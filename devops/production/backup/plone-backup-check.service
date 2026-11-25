@@ -1,0 +1,7 @@
+[Unit]
+Description=Check that the nightly Plone backup ran recently
+OnFailure=notify-failure@%n.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/plone-backup-check.sh 30

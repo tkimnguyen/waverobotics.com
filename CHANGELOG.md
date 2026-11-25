@@ -1,5 +1,12 @@
 # Changes
 
+## 2026-11-25
+
+- Email alerts from the production server are in the repo
+  (`devops/production/alerts/`): mail when a service fails (with its log) and
+  when a disk is over 85% full. The nightly backup emails when it fails, and a
+  new daily check emails when no backup has succeeded for 30 hours. (#21)
+
 ## 2026-11-19
 
 - The first slide of a full-width slider loads right away and with high

@@ -1,0 +1,6 @@
+[Unit]
+Description=Email the admin that %i failed
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/notify-failure %i
