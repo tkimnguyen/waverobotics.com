@@ -254,8 +254,11 @@ by the Plone Foundation and contributors, generated with
 `docs/slides/waverobotics-site.md` is a short deck for the team: what the site
 does for Wave Robotics, how it's built, and what changed in November 2026. It is
 written for [Marp](https://marp.app); `waverobotics-site.html` next to it is the
-rendered deck (open it in a browser; arrow keys move between slides, `f` goes
-full screen). It loads its images from `docs/slides/images/`, so keep the folder
+rendered deck, published with GitHub Pages at
+<https://tkimnguyen.github.io/waverobotics.com/slides/waverobotics-site.html>
+(arrow keys move between slides, `f` goes full screen). Pages serves the
+`docs/` folder of `main` as is; `docs/.nojekyll` stops GitHub from turning the
+`.md` source into a page of the same name. It loads its images from `docs/slides/images/`, so keep the folder
 together. To render it again after editing:
 
 ```shell
