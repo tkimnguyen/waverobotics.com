@@ -1,5 +1,11 @@
 # Changes
 
+## 2026-11-25
+
+- `docs/slides/`: a short slide deck for the team about the site, what it does
+  for Wave Robotics and what changed in November 2026, as Marp Markdown and
+  rendered HTML. (#22)
+
 ## 2026-11-19
 
 - The first slide of a full-width slider loads right away and with high
