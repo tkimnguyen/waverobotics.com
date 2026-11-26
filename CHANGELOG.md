@@ -2,6 +2,11 @@
 
 ## 2026-11-25
 
+- Embedded frames in HTML blocks get a title when the editor didn't give them
+  one, named after where they come from ("Google Calendar", "YouTube video",
+  "Google Form", ...), so screen readers can say what they are. A title the
+  editor writes is kept. Fixes the untitled calendar on the home page and the
+  videos on two contact pages. (#24)
 - The slide deck is on GitHub Pages:
   https://tkimnguyen.github.io/waverobotics.com/slides/waverobotics-site.html (#23)
 - Email alerts from the production server are in the repo
