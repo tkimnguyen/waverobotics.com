@@ -16,10 +16,15 @@ Open work on the site. Done items move to [CHANGELOG.md](CHANGELOG.md).
 
 ## Content (editors)
 
-Accessibility fixes found by the 2026-11-11 axe check (WCAG 2.2 A/AA) that need
-content edits, not code:
+Content edits, not code (the first item is from the 2026-11-11 axe accessibility
+check, WCAG 2.2 A/AA):
 
 - Give the banner image on `/en/news/wave-robotics-shop` alternative text.
+- The shop post `/en/news/wave-robotics-shop` still says the store closes
+  12/2/2025: update it with a current store, or retire it.
+- The Blog page `/en/news` shows the description "Everything about Plone
+  Conference and Python Cerrado", left over from the conference site: replace
+  it with one about Wave Robotics news (Edit, then the Description field).
 - Optional: the two YouTube videos on `/en/contact/reading-with-robots` and
   `/en/contact/training-video-tutorials` now get the general title "YouTube
   video" (#24); a `title="..."` on each `<iframe>` naming the video is better.

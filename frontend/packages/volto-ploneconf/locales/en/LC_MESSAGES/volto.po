@@ -76,11 +76,6 @@ msgstr ""
 msgid "Please choose an existing content as source for this element"
 msgstr ""
 
-#. Default: "Plone Conference"
-#: components/Logo/LogoPloneConf
-msgid "Plone Conference"
-msgstr ""
-
 #. Default: "Read more"
 #: components/Blocks/Teaser/TeaserFeatured
 msgid "Read more"
@@ -130,6 +125,11 @@ msgstr "This site is built using Python & Plone"
 #. Default: "Title"
 #: components/Blocks/SponsorLevel/schema
 msgid "Title"
+msgstr ""
+
+#. Default: "Wave Robotics home"
+#: components/Logo/LogoPloneConf
+msgid "Wave Robotics home"
 msgstr ""
 
 #. Default: "Color"

@@ -81,11 +81,6 @@ msgstr ""
 msgid "Please choose an existing content as source for this element"
 msgstr "Por favor escolha um conteúdo existente como fonte para esse elemento"
 
-#. Default: "Plone Conference"
-#: components/Logo/LogoPloneConf
-msgid "Plone Conference"
-msgstr "Plone Conference"
-
 #. Default: "Read more"
 #: components/Blocks/Teaser/TeaserFeatured
 msgid "Read more"
@@ -136,6 +131,11 @@ msgstr "Este site é desenvolvido com Python & Plone"
 #: components/Blocks/SponsorLevel/schema
 msgid "Title"
 msgstr "Título"
+
+#. Default: "Wave Robotics home"
+#: components/Logo/LogoPloneConf
+msgid "Wave Robotics home"
+msgstr ""
 
 #. Default: "Color"
 #: components/Blocks/Teaser/coloredCTAschema
