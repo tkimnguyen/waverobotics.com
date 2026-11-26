@@ -8,10 +8,12 @@ import { Image } from 'semantic-ui-react';
 // 3x the displayed 178x100 size, from waveRoboticsLogo3.jpg (2853x1603, 275 KB).
 import PloneConfLogo from './waveRoboticsLogo-534x300.jpg';
 
+// The logo links to the home page, so its text says where the link goes
+// (it said "Plone Conference", left over from the conference site).
 const messages = defineMessages({
-  ploneconf: {
-    id: 'Plone Conference',
-    defaultMessage: 'Plone Conference',
+  logoAlt: {
+    id: 'Wave Robotics home',
+    defaultMessage: 'Wave Robotics home',
   },
 });
 
@@ -26,8 +28,7 @@ const LogoPloneConf = ({ className }) => {
   return (
     <Image
       src={PloneConfLogo}
-      alt={intl.formatMessage(messages.ploneconf)}
-      title={intl.formatMessage(messages.ploneconf)}
+      alt={intl.formatMessage(messages.logoAlt)}
       className={`logoConf logoPloneConf ${className}`}
       width={'267px'}
       height={'150px'}

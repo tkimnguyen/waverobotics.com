@@ -1,5 +1,13 @@
 # Changes
 
+## 2026-11-26
+
+- The header logo's text (read out by screen readers and shown when images
+  don't load) says "Wave Robotics home" instead of "Plone Conference", left
+  over from the conference site; the "Plone Conference" tooltip on it is gone.
+  TODO lists two more content leftovers: the expired shop post and the Blog
+  page description. (#26)
+
 ## 2026-11-25
 
 - The backend writes its access log and event log to files in the instance's
