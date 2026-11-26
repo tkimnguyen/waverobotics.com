@@ -19,10 +19,10 @@ Open work on the site. Done items move to [CHANGELOG.md](CHANGELOG.md).
 Accessibility fixes found by the 2026-11-11 axe check (WCAG 2.2 A/AA) that need
 content edits, not code:
 
-- Give the embedded Google Calendar on the home page a title.
-- Give the embedded YouTube videos on `/en/contact/reading-with-robots` and
-  `/en/contact/training-video-tutorials` titles.
 - Give the banner image on `/en/news/wave-robotics-shop` alternative text.
+- Optional: the two YouTube videos on `/en/contact/reading-with-robots` and
+  `/en/contact/training-video-tutorials` now get the general title "YouTube
+  video" (#24); a `title="..."` on each `<iframe>` naming the video is better.
 
 ## Code
 
