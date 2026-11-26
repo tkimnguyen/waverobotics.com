@@ -2,6 +2,9 @@
 
 ## 2026-11-25
 
+- The backend writes its access log and event log to files in the instance's
+  `var/log` again (`backend/docker/zope.ini`), kept for 4 weeks by logrotate,
+  in addition to the container log, which only holds a few days. (#25)
 - Embedded frames in HTML blocks get a title when the editor didn't give them
   one, named after where they come from ("Google Calendar", "YouTube video",
   "Google Form", ...), so screen readers can say what they are. A title the

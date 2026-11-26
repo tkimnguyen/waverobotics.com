@@ -111,7 +111,14 @@ The backend container runs as the host user that owns the instance data. It moun
 the existing instance `var` directory as `/data` (database in `filestorage/`,
 blobs in `blobs/`), so the data stays where it was before the move to containers.
 Container logs go to Docker (`docker compose logs`), capped at 5 × 10 MB per
-container.
+container (for the backend that is only a few days, and it is lost when the
+container is recreated). The backend also writes its access log and event log
+to `/data/log/instance-access.log` and `/data/log/instance.log` (the instance's
+`var/log` on the host), configured in `backend/docker/zope.ini`; a host
+logrotate rule keeps them for 4 weeks, compressed. That `zope.ini` is a copy of
+the base image's with two file handlers added: compare it with the new base
+image's (`docker run --rm --entrypoint cat plone/plone-backend:<version>
+/app/etc/zope.ini`) when upgrading Plone.
 
 ### Deploying a new build
 

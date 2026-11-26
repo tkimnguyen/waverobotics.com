@@ -33,6 +33,10 @@ LABEL org.opencontainers.image.title="waverobotics.com backend" \
 # Copy /app from builder
 COPY --from=builder /app /app
 
+# The image's zope.ini, plus copies of the access and event logs in /data/log
+# (see the comment at the top of the file).
+COPY docker/zope.ini /app/etc/zope.ini
+
 RUN <<EOT
     set -e
     ln -s /data /app/var
